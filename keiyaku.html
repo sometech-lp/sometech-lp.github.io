@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>ホームページ制作 業務委託契約書 ご同意フォーム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,600;6..96,700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1B1B1B;
+  --paper:#F4F2ED;
+  --white:#FCFBF8;
+  --mute:#77756F;
+  --rule:#1B1B1B;
+  --hair:#D8D5CC;
+  --accent:#D6482B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.9;
+  font-size:14px;
+  -webkit-font-smoothing:antialiased;
+  padding:34px 16px 70px;
+}
+.wrap{max-width:560px;margin:0 auto;}
+
+/* ヘッダー */
+.head{text-align:center;margin-bottom:26px;}
+.head .eyebrow{
+  display:inline-block;
+  font-family:"Bodoni Moda",serif;font-weight:700;
+  font-size:10.5px;letter-spacing:.38em;text-indent:.38em;
+  color:var(--accent);
+  margin-bottom:14px;
+}
+.head h1{
+  font-family:"Shippori Mincho",serif;font-weight:600;
+  font-size:23px;line-height:1.6;letter-spacing:.08em;
+}
+.head p{font-size:12.5px;margin-top:12px;color:var(--mute);line-height:2;}
+.dots{display:flex;justify-content:center;align-items:center;gap:0;margin:18px 0 0;}
+.dots span{width:34px;height:1px;background:var(--hair);}
+.dots span:nth-child(2){width:5px;height:5px;background:var(--accent);transform:rotate(45deg);margin:0 8px;}
+
+/* カード */
+.card{
+  position:relative;
+  background:var(--white);border:1px solid var(--rule);
+  padding:26px 20px 30px;margin-bottom:22px;
+}
+.card::before{
+  content:"";position:absolute;inset:7px;
+  border:1px solid rgba(27,27,27,.13);pointer-events:none;
+}
+.card > *{position:relative;}
+.card.hide{display:none;}
+.card h2{
+  font-family:"Shippori Mincho",serif;font-weight:600;font-size:17px;
+  letter-spacing:.08em;
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;
+}
+.card h2 .tag{
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.14em;
+  color:var(--accent);border:1px solid var(--accent);
+  padding:2px 9px;white-space:nowrap;
+}
+
+/* 契約書本文 */
+.doc{
+  border:1px solid var(--hair);background:var(--paper);
+  padding:18px 15px;max-height:52vh;overflow-y:auto;
+  font-size:13px;line-height:2;-webkit-overflow-scrolling:touch;
+}
+.doc h3{
+  font-family:"Shippori Mincho",serif;font-size:14px;font-weight:600;
+  letter-spacing:.06em;
+  margin:24px 0 8px;padding-left:11px;border-left:2px solid var(--accent);
+}
+.doc h3:first-child{margin-top:0;}
+.doc p{margin-bottom:10px;}
+.doc ul,.doc ol{margin:0 0 12px 20px;}
+.doc li{margin-bottom:6px;}
+.doc .b{font-weight:700;background:linear-gradient(transparent 68%, rgba(214,72,43,.28) 68%);}
+.doc table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:12.5px;}
+.doc th,.doc td{border:1px solid var(--hair);padding:7px 9px;text-align:left;}
+.doc th{background:#EDEAE2;font-weight:700;font-size:11.5px;letter-spacing:.06em;}
+.scroll-note{
+  font-size:11.5px;color:var(--mute);text-align:center;margin-top:12px;letter-spacing:.06em;
+}
+.scroll-note.done{color:var(--accent);font-weight:700;}
+
+/* 入力 */
+.field{margin-bottom:22px;}
+label.q,.q{
+  display:block;font-weight:700;font-size:13.5px;margin-bottom:8px;letter-spacing:.04em;
+}
+.badge{
+  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:1px 8px;margin-left:8px;vertical-align:2px;
+}
+.badge.req{background:var(--accent);color:#fff;}
+input[type=text],input[type=email],select{
+  width:100%;font:inherit;font-size:16px;
+  border:1px solid var(--rule);background:var(--white);
+  padding:13px 14px;border-radius:0;
+  -webkit-appearance:none;appearance:none;
+}
+select{
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231B1B1B' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;
+}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.hint{font-size:11.5px;color:var(--mute);margin-top:6px;line-height:1.9;}
+.err{display:none;color:var(--accent);font-size:12px;font-weight:700;margin-top:6px;}
+.field.bad .err{display:block;}
+.field.bad input[type=text],.field.bad input[type=email],.field.bad select{border-color:var(--accent);}
+
+/* 同意チェック */
+.agree{
+  display:flex;align-items:flex-start;gap:12px;
+  border:1px solid var(--rule);background:var(--white);
+  padding:16px 15px;cursor:pointer;user-select:none;
+  font-size:14px;font-weight:700;line-height:1.9;
+}
+.agree.on{background:rgba(214,72,43,.06);border-color:var(--accent);}
+.agree input{position:absolute;opacity:0;pointer-events:none;}
+.agree .mark{
+  flex-shrink:0;width:24px;height:24px;margin-top:2px;
+  border:1px solid var(--rule);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+}
+.agree .mark::after{
+  content:"";display:none;width:6px;height:12px;margin-top:-4px;
+  border:solid var(--accent);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);
+}
+.agree.on .mark::after{display:block;}
+.agree.locked{opacity:.45;}
+
+/* ボタン */
+.btn{
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.05em;
+  border:1px solid rgba(214,72,43,.5);
+  background:linear-gradient(180deg, rgba(214,72,43,.13) 0%, rgba(214,72,43,.07) 100%);
+  color:#B23A1F;
+  padding:16px 10px;cursor:pointer;width:100%;
+  box-shadow:5px 5px 0 rgba(27,27,27,.16);
+  margin-top:24px;border-radius:0;
+  transition:transform .18s,box-shadow .18s,background .18s;
+}
+.btn:active{
+  transform:translate(3px,3px);box-shadow:2px 2px 0 rgba(27,27,27,.16);
+  background:linear-gradient(180deg, rgba(214,72,43,.2) 0%, rgba(214,72,43,.12) 100%);
+}
+.btn[disabled]{opacity:.5;cursor:default;}
+.sending{display:none;text-align:center;font-weight:700;margin-top:14px;font-size:13px;color:var(--mute);}
+.sending.show{display:block;}
+.spinner{
+  display:inline-block;width:15px;height:15px;vertical-align:-3px;margin-right:7px;
+  border:2px solid var(--hair);border-top-color:var(--accent);border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media (prefers-reduced-motion:reduce){.spinner{animation:none;}}
+
+/* 完了 */
+.done{display:none;text-align:center;}
+.done.show{display:block;}
+.done .icon{
+  width:72px;height:72px;margin:8px auto 18px;border-radius:50%;
+  background:var(--white);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;color:var(--accent);
+}
+.done h2{justify-content:center;}
+.done p{font-size:13.5px;margin-top:10px;line-height:2;}
+.note{
+  font-size:11.5px;color:var(--mute);background:var(--paper);
+  border:1px dashed var(--hair);
+  padding:12px 13px;margin-top:16px;text-align:left;line-height:2;
+}
+.foot{text-align:center;font-size:10px;letter-spacing:.14em;color:var(--mute);margin-top:30px;}
+.brandmark{
+  margin-top:28px;padding-top:20px;border-top:1px solid var(--hair);
+  font-family:"Bodoni Moda",serif;font-weight:700;
+  font-size:14px;letter-spacing:.3em;text-indent:.3em;color:var(--ink);text-align:center;
+}
+.brandmark span{
+  display:block;margin-top:7px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:10px;font-weight:500;letter-spacing:.3em;text-indent:.3em;color:var(--mute);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <span class="eyebrow">SOMETECH</span>
+    <h1>業務委託契約書<br>ご同意フォーム</h1>
+    <p>内容をご確認のうえ、<br>ご同意いただける場合は下記よりお進みください。</p>
+    <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+  </header>
+
+  <!-- ===== 契約書本文 ===== -->
+  <section class="card" id="main-card">
+    <h2><span class="tag">契約書</span>内容のご確認</h2>
+
+    <div class="doc" id="doc">
+      <p>本契約は、ホームページ等のウェブサイト（以下「本制作物」）の制作に関し、制作者（以下「当方」）と依頼者（以下「お客様」）との間で締結するものです。</p>
+
+      <h3>第1条（本契約の目的）</h3>
+      <p>当方は、お客様の依頼に基づき本制作物を制作し、お客様は、その対価をお支払いいただくものとします。</p>
+      <p>制作は、オンラインでのやり取りにより完結する形で行います。現地での撮影・訪問による打ち合わせは、本契約に含まれません。</p>
+
+      <h3>第2条（プランと料金）</h3>
+      <table>
+        <tr><th>プラン</th><th>料金（税込）</th></tr>
+        <tr><td>リンクハブ</td><td>39,000円</td></tr>
+        <tr><td>ホームページ</td><td>198,000円</td></tr>
+      </table>
+      <table>
+        <tr><th>オプション</th><th>料金（税込）</th></tr>
+        <tr><td>文字ロゴの作成</td><td>20,000円</td></tr>
+        <tr><td>動画の追加（1本につき）</td><td>10,000円</td></tr>
+        <tr><td>ページの追加（1ページにつき）</td><td>20,000円</td></tr>
+        <tr><td>独自ドメインの設定代行</td><td>5,000円</td></tr>
+        <tr><td>Googleビジネスプロフィールの初期設定</td><td>15,000円</td></tr>
+        <tr><td>お急ぎでの制作</td><td>個別にお見積り</td></tr>
+      </table>
+      <p>各プランに含まれる内容は、別途ご案内する料金表のとおりとします。</p>
+      <p>ホームページプランにおけるスタッフ紹介の掲載人数に、制限はありません。</p>
+      <p>ホームページプランの本制作物は、ページ内の見出しへ移動できる目次メニューを備えた<span class="b">1ページ構成</span>を基本とします。独立した別のページを追加される場合は、上記オプション「ページの追加」にて対応します。</p>
+      <p>なお、メニュー内容の詳細な紹介、スタッフお一人ずつの詳しい紹介など、大幅に情報量が増える場合は、別途お見積りのうえご相談とさせていただきます。</p>
+
+      <h3>第3条（お支払い）</h3>
+      <ol>
+        <li>お支払い方法は銀行振込のみとし、振込手数料はお客様のご負担とします。</li>
+        <li>お支払いは<span class="b">ご契約時に半額、完成後・お渡し前に残り半額</span>の2回に分けるものとします。</li>
+        <li>完成からお渡しまでの流れは次のとおりです。
+          <ol>
+            <li>当方が、完成した本制作物を確認用URLにてご提示します</li>
+            <li>お客様が内容をご確認のうえ、ご承認ください</li>
+            <li>ご承認後、当方より残金をご請求します</li>
+            <li>ご入金を確認した後、本公開およびデータのお渡しを行います</li>
+          </ol>
+        </li>
+        <li>残金は、ご請求後3営業日以内にお振込みください。</li>
+      </ol>
+
+      <h3>第4条（制作期間）</h3>
+      <ol>
+        <li>制作期間の目安は、リンクハブプランで<span class="b">1週間から2週間</span>、ホームページプランで<span class="b">1か月から1か月半</span>とします。</li>
+        <li>前項の期間は、制作に必要なお写真・文章・情報がすべて揃った時点から起算します。</li>
+        <li>お客様のご確認をお待ちしている期間は、<span class="b">前2項の期間に含みません。</span></li>
+        <li>複数のご依頼が重なった場合は、ご契約の順に着手します。着手の時期は、ご契約時にご案内します。</li>
+      </ol>
+
+      <h3>第5条（修正）</h3>
+      <p style="font-weight:700;margin-top:10px;">【完成後の修正】</p>
+      <ol>
+        <li>完成した本制作物をご確認いただいた後の修正は、文章の直しおよび写真の差し替えを対象として<span class="b">2回まで無料</span>とします。3回目以降は、1回につき5,000円（税込）を申し受けます。</li>
+        <li>デザインの方向性の作り直し、または全体構成の大きな変更をご希望の場合は、<span class="b">制作費の50%</span>を申し受けます。</li>
+      </ol>
+      <p style="font-weight:700;">【ラフ案段階の修正】</p>
+      <ol start="3">
+        <li>制作途中のラフ案の段階における色味・写真・文言などの調整は、<span class="b">回数の制限なく無料</span>で対応します。</li>
+        <li>ラフ案の段階でデザインの方向性を大きく変更される場合は、<span class="b">1回まで無料</span>とします。2回目以降は、制作費の50%を申し受けます。</li>
+      </ol>
+
+      <h3>第6条（公開後の更新サポート）</h3>
+      <ol>
+        <li>ホームページプランには、公開後3か月間、<span class="b">月1回まで</span>の更新サポート（アフターケア）が含まれます。リンクハブプランには含まれません。</li>
+        <li>1回の更新で対応する内容は、文章の差し替え（メニュー内容、料金、営業時間など）、写真の入れ替え、キャンペーン告知の追加および削除とします。</li>
+        <li>複数箇所のご依頼は、まとめてお送りいただくことで1回として対応します。</li>
+        <li>デザインの変更、および新たなセクションの追加は更新サポートに含みません。別途お見積りします。</li>
+        <li>ご利用のなかった月を翌月へ繰り越すことはできません。</li>
+      </ol>
+
+      <h3>第7条（お客様にご用意いただくもの）</h3>
+      <ol>
+        <li>本制作物に使用する写真および文章は、お客様に権利があるもの、または使用許諾を得たものをご提供ください。</li>
+        <li>既存のウェブサイトやロゴをそのまま模倣する制作はお受けできません。</li>
+        <li>掲載内容（料金・営業時間・サービス内容等）の最終確認は、お客様にて行っていただきます。</li>
+      </ol>
+
+      <h3>第8条（サーバーおよびドメイン）</h3>
+      <ol>
+        <li>本制作物を公開するサーバーおよびドメインは、<span class="b">お客様名義でのご契約</span>とし、費用はお客様のご負担とします。</li>
+        <li>当方は、お客様のクレジットカード情報および各種パスワードをお預かりしません。</li>
+        <li>無料の公開先を利用する場合、この限りではありません。</li>
+      </ol>
+
+      <h3>第9条（著作権）</h3>
+      <ol>
+        <li>本制作物の著作権は、<span class="b">残金のご入金を当方が確認した時点</span>をもって、お客様に移転します。</li>
+        <li>前項の移転前において、確認用ページを含む本制作物の内容を無断で使用、複製、改変すること、および第三者へ共有することを禁じます。</li>
+        <li>お客様よりご提供いただいた写真・文章の権利は、お客様に帰属します。</li>
+        <li>当方は、完成した本制作物を実績としてウェブサイト等に掲載する場合があります。掲載を希望されない場合は、あらかじめお申し出ください。</li>
+      </ol>
+
+      <h3>第10条（連絡が途絶えた場合）</h3>
+      <ol>
+        <li>お客様からのご連絡がないまま<span class="b">1週間</span>が経過した場合、当方は制作を一時中断します。</li>
+        <li>さらにご連絡がないまま<span class="b">2週間</span>が経過した場合、本契約は終了とします。この場合、お支払い済みの前金は返金いたしません。</li>
+        <li>ご都合により作業を進められない期間がある場合は、あらかじめお知らせください。日程を調整します。</li>
+      </ol>
+
+      <h3>第11条（キャンセル）</h3>
+      <ol>
+        <li>制作着手前のキャンセルは、お支払い済みの金額を全額返金します。</li>
+        <li>制作着手後のキャンセルは、前金の返金はいたしません。残金のお支払いは不要です。</li>
+        <li>残金のご入金後のキャンセルおよび返金はお受けできません。</li>
+      </ol>
+
+      <h3>第12条（連絡方法）</h3>
+      <ol>
+        <li>ご相談および制作中のやり取りは、公式LINEにて行います。</li>
+        <li>お見積り、お申し込み、ご請求、納品に関するご連絡は、メールにて行います。</li>
+      </ol>
+
+      <h3>第13条（免責）</h3>
+      <ol>
+        <li>当方は、本制作物の公開により集客・売上等の成果を保証するものではありません。</li>
+        <li>サーバー会社やドメイン提供元など、第三者のサービスに起因する不具合について、当方は責任を負いません。</li>
+        <li>お客様よりご提供いただいた情報の誤りに起因する損害について、当方は責任を負いません。</li>
+      </ol>
+
+      <h3>第14条（協議）</h3>
+      <p>本契約に定めのない事項、または解釈に疑義が生じた事項については、双方誠意をもって協議のうえ解決するものとします。</p>
+
+      <h3>制作者</h3>
+      <p>染めテク　清水良平<br>
+      所在地：群馬県藤岡市中920-1　フォーリーフスA<br>
+      （電話番号は、ご請求があれば遅滞なく開示します）<br>
+      メール：sometech.lp.2026@gmail.com</p>
+    </div>
+
+    <p class="scroll-note" id="scroll-note">▼ 最後までスクロールしてご確認ください</p>
+
+    <h2 style="margin-top:26px;"><span class="tag">ご記入</span>お客様情報</h2>
+
+    <div class="field" data-key="name">
+      <label class="q" for="f-name">お名前<span class="badge req">必須</span></label>
+      <input type="text" id="f-name" autocomplete="name" placeholder="例：山田 花子">
+      <p class="hint">契約書にご署名いただくお名前をご入力ください。</p>
+      <p class="err">お名前を入力してください</p>
+    </div>
+
+    <div class="field" data-key="email">
+      <label class="q" for="f-email">メールアドレス<span class="badge req">必須</span></label>
+      <input type="email" id="f-email" autocomplete="email" inputmode="email" placeholder="例：hanako@example.com">
+      <p class="err">メールアドレスの形式をご確認ください</p>
+    </div>
+
+    <div class="field" data-key="plan">
+      <label class="q" for="f-plan">ご契約プラン<span class="badge req">必須</span></label>
+      <select id="f-plan">
+        <option value="">選択してください</option>
+        <option value="リンクハブ（39,000円）">リンクハブ（39,000円）</option>
+        <option value="ホームページ（198,000円）">ホームページ（198,000円）</option>
+      </select>
+      <p class="err">プランを選択してください</p>
+    </div>
+
+    <div class="field" data-key="option">
+      <label class="q" for="f-option">オプション</label>
+      <input type="text" id="f-option" placeholder="ご依頼のオプションがあればご記入ください">
+      <p class="hint">特にない場合は空欄で問題ありません。</p>
+    </div>
+
+    <div class="field" data-key="agree">
+      <label class="agree locked" id="agree-box">
+        <input type="checkbox" id="f-agree" disabled>
+        <span class="mark"></span>
+        <span>上記の契約内容をすべて確認し、同意します</span>
+      </label>
+      <p class="hint" id="agree-hint">契約書を最後までスクロールすると、チェックできるようになります。</p>
+      <p class="err">同意のチェックをお願いします</p>
+    </div>
+
+    <button type="button" class="btn" id="send-btn">同意して送信する</button>
+    <p class="sending" id="sending"><span class="spinner"></span>送信しています…そのままお待ちください</p>
+  </section>
+
+  <!-- ===== 完了 ===== -->
+  <section class="card done" id="done-card">
+    <div class="icon">✓</div>
+    <h2>ご同意ありがとうございます</h2>
+    <p>契約内容へのご同意を受け付けました。<br>
+    このあと、お支払いのご案内をメールでお送りします。</p>
+    <p class="note">送信いただいた内容の控えを、当方にて記録しております。契約書の内容をご確認されたい場合は、いつでもお申し付けください。</p>
+    <p class="brandmark">SOMETECH<span>染めテク</span></p>
+  </section>
+
+  <p class="foot">SOMETECH（染めテク）／ホームページ制作 業務委託契約書 ご同意フォーム</p>
+</div>
+
+<script>
+/* ============================================================
+   設定：申し込みフォームと同じGASのURLを貼ります
+   ============================================================ */
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxUhbZFlsMXtw9Hzc1ab8SGm_kiLDlTcmQ9wUZ0a7luOOLR0lx1734dytqf5A0PTv7L/exec";
+
+/* ---------- 最後までスクロールしたら同意欄を解放 ---------- */
+const doc = document.getElementById("doc");
+const agreeBox = document.getElementById("agree-box");
+const agreeInput = document.getElementById("f-agree");
+const scrollNote = document.getElementById("scroll-note");
+const agreeHint = document.getElementById("agree-hint");
+
+function unlock(){
+  if(!agreeInput.disabled) return;
+  agreeInput.disabled = false;
+  agreeBox.classList.remove("locked");
+  scrollNote.textContent = "✓ 最後までご確認いただきました";
+  scrollNote.classList.add("done");
+  agreeHint.textContent = "内容にご同意いただける場合はチェックしてください。";
+}
+doc.addEventListener("scroll", ()=>{
+  if(doc.scrollTop + doc.clientHeight >= doc.scrollHeight - 40) unlock();
+});
+/* 画面が大きくスクロール不要な場合も解放 */
+if(doc.scrollHeight <= doc.clientHeight + 40) unlock();
+
+agreeInput.addEventListener("change", ()=>{
+  agreeBox.classList.toggle("on", agreeInput.checked);
+});
+
+/* ---------- 送信 ---------- */
+function markBad(key,bad){
+  const f = document.querySelector('.field[data-key="'+key+'"]');
+  if(f) f.classList.toggle("bad",bad);
+  return bad;
+}
+document.getElementById("send-btn").addEventListener("click", async ()=>{
+  const name  = document.getElementById("f-name").value.trim();
+  const email = document.getElementById("f-email").value.trim();
+  const plan  = document.getElementById("f-plan").value;
+  const option= document.getElementById("f-option").value.trim();
+
+  const bads = [];
+  if(markBad("name", name==="")) bads.push("name");
+  if(markBad("email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) bads.push("email");
+  if(markBad("plan", plan==="")) bads.push("plan");
+  if(markBad("agree", !agreeInput.checked)) bads.push("agree");
+  if(bads.length){
+    document.querySelector('.field[data-key="'+bads[0]+'"]').scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+
+  if(!GAS_URL){ alert("送信先がまだ設定されていません（テスト表示中です）"); return; }
+
+  const btn = document.getElementById("send-btn");
+  btn.disabled = true;
+  document.getElementById("sending").classList.add("show");
+
+  const payload = {
+    formType: "契約同意",
+    name: name,
+    email: email,
+    plan: plan,
+    option: option,
+    agreed: "同意する",
+    agreedAt: new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"}),
+    contractVersion: "2026-09版",
+    userAgent: navigator.userAgent
+  };
+
+  try{
+    const res = await fetch(GAS_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok) throw new Error("bad status");
+    document.getElementById("main-card").classList.add("hide");
+    document.getElementById("done-card").classList.add("show");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }catch(e){
+    alert("送信に失敗しました。電波の良い場所でもう一度お試しください。\n何度も失敗する場合は、お手数ですがLINEでご連絡ください。");
+    btn.disabled = false;
+  }finally{
+    document.getElementById("sending").classList.remove("show");
+  }
+});
+</script>
+</body>
+</html>

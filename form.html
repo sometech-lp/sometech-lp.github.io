@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>ホームページ制作 お申し込みフォーム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,600;6..96,700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1B1B1B;
+  --paper:#F4F2ED;
+  --white:#FCFBF8;
+  --mute:#77756F;
+  --rule:#1B1B1B;
+  --hair:#D8D5CC;
+  --accent:#D6482B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+  background:var(--paper);color:var(--ink);
+  font-size:14px;line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+  padding:34px 16px 70px;
+}
+.wrap{max-width:520px;margin:0 auto;}
+
+/* ---------- ヘッダー ---------- */
+.head{text-align:center;margin-bottom:24px;}
+.head .eyebrow{
+  display:inline-block;
+  font-family:"Bodoni Moda",serif;font-weight:700;
+  font-size:10.5px;letter-spacing:.38em;text-indent:.38em;
+  color:var(--accent);margin-bottom:14px;
+}
+.head h1{
+  font-family:"Shippori Mincho",serif;font-weight:600;
+  font-size:22px;line-height:1.6;letter-spacing:.08em;
+}
+.head h1 .cmy,.head h1 .c,.head h1 .m,.head h1 .y{color:inherit;}
+.head p{font-size:12.5px;margin-top:12px;color:var(--mute);line-height:2;}
+
+/* ---------- ステップ表示 ---------- */
+.steps{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:24px;}
+.step-dot{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--hair);background:var(--white);
+  font-family:"Bodoni Moda",serif;font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+  color:#B9B5AA;
+  transition:all .25s;
+}
+.step-dot.done{border-color:var(--rule);background:var(--ink);color:var(--paper);}
+.step-dot.now{
+  border-color:var(--accent);color:var(--accent);background:var(--white);
+  transform:scale(1.12);
+  box-shadow:3px 3px 0 rgba(27,27,27,.12);
+}
+
+/* ---------- カード ---------- */
+.card{
+  position:relative;
+  background:var(--white);border:1px solid var(--rule);
+  padding:26px 20px 30px;
+  display:none;
+}
+.card::before{
+  content:"";position:absolute;inset:7px;
+  border:1px solid rgba(27,27,27,.13);pointer-events:none;
+}
+.card > *{position:relative;}
+.card.show{display:block;animation:pop .25s ease;}
+@keyframes pop{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion:reduce){
+  .card.show{animation:none;}
+  .step-dot{transition:none;}
+}
+.card h2{
+  font-family:"Shippori Mincho",serif;font-weight:600;font-size:17px;
+  letter-spacing:.08em;
+  display:flex;align-items:center;gap:10px;margin-bottom:6px;
+}
+.card h2 .tag{
+  font-family:"Bodoni Moda",serif;
+  font-size:10px;font-weight:700;letter-spacing:.14em;
+  color:var(--accent);border:1px solid var(--accent);
+  padding:2px 9px;white-space:nowrap;
+}
+.card > .lead{font-size:12.5px;color:var(--mute);margin-bottom:20px;line-height:2;}
+
+/* ---------- 入力パーツ ---------- */
+.field{margin-bottom:24px;}
+.field:last-of-type{margin-bottom:6px;}
+label.q, .q{
+  display:block;font-weight:700;font-size:13.5px;margin-bottom:9px;letter-spacing:.04em;
+}
+.badge{
+  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;
+  padding:1px 8px;margin-left:8px;vertical-align:2px;
+}
+.badge.req{background:var(--accent);color:#fff;}
+.badge.opt,.badge.optional{border:1px solid var(--hair);color:var(--mute);}
+.badge.multi{border:1px solid var(--accent);color:var(--accent);}
+.hint{font-size:11.5px;color:var(--mute);margin-top:7px;line-height:1.9;}
+input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{
+  width:100%;
+  font:inherit;font-size:16px;
+  border:1px solid var(--rule);border-radius:0;
+  padding:13px 14px;background:var(--white);
+  -webkit-appearance:none;appearance:none;
+}
+textarea{min-height:110px;resize:vertical;}
+input:focus,select:focus,textarea:focus,button:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+input[disabled]{background:var(--paper);color:var(--mute);}
+select{
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231B1B1B' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:40px;
+}
+.zip-row{display:flex;gap:8px;}
+.zip-row input{flex:1;}
+.zip-btn{
+  flex-shrink:0;
+  font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.04em;
+  border:1px solid rgba(214,72,43,.5);border-radius:0;
+  background:linear-gradient(180deg, rgba(214,72,43,.13) 0%, rgba(214,72,43,.07) 100%);
+  color:#B23A1F;padding:0 14px;cursor:pointer;
+}
+.zip-btn:active{transform:translate(1px,1px);}
+
+/* 選択肢（ラジオ・チェック） */
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{
+  display:flex;align-items:center;gap:11px;
+  border:1px solid var(--rule);border-radius:0;
+  background:var(--white);padding:13px 14px;
+  font-size:14px;line-height:1.8;cursor:pointer;user-select:none;
+  transition:background .15s,border-color .15s;
+}
+.opt input{position:absolute;opacity:0;pointer-events:none;}
+.opt .mark{
+  flex-shrink:0;width:20px;height:20px;
+  border:1px solid var(--rule);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+}
+.opt.radio .mark{border-radius:50%;}
+.opt.check .mark{border-radius:0;}
+.opt .mark::after{content:"";display:none;}
+.opt.radio .mark::after{width:9px;height:9px;border-radius:50%;background:var(--accent);}
+.opt.check .mark::after{
+  width:5px;height:10px;margin-top:-3px;
+  border:solid var(--accent);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);
+}
+.opt.on{background:rgba(214,72,43,.06);border-color:var(--accent);}
+.opt.on .mark::after{display:block;}
+.opt .sub{font-size:11.5px;color:var(--mute);display:block;font-weight:400;}
+.nolineopt{margin-top:10px;padding:11px 14px;font-size:13px;}
+.followup{display:none;margin-top:9px;}
+.followup.show{display:block;}
+
+/* 画像アップロード */
+.upload-box{
+  border:1px dashed var(--rule);border-radius:0;
+  background:var(--white);padding:20px 14px;text-align:center;cursor:pointer;
+}
+.upload-box strong{font-family:"Shippori Mincho",serif;font-weight:600;font-size:13.5px;letter-spacing:.06em;}
+.upload-box .hint{margin-top:5px;}
+.thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+.thumb{position:relative;width:84px;height:84px;}
+.thumb img{
+  width:100%;height:100%;object-fit:cover;
+  border:1px solid var(--rule);border-radius:0;display:block;
+}
+.thumb .del{
+  position:absolute;top:-9px;right:-9px;
+  width:24px;height:24px;border-radius:50%;
+  background:var(--ink);color:var(--paper);border:none;cursor:pointer;
+  font-size:13px;line-height:1;font-weight:700;
+}
+.note{
+  font-size:11.5px;color:var(--mute);background:var(--paper);
+  border:1px dashed var(--hair);
+  padding:11px 13px;margin-top:10px;line-height:1.9;
+}
+
+/* 参考URL */
+.url-list{display:flex;flex-direction:column;gap:9px;}
+.add-url{
+  margin-top:9px;
+  font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.04em;
+  border:1px solid var(--rule);border-radius:0;
+  background:var(--white);padding:8px 16px;cursor:pointer;
+}
+.add-url:active{transform:translate(1px,1px);}
+
+/* エラー */
+.err{display:none;color:var(--accent);font-size:12px;font-weight:700;margin-top:6px;}
+.field.bad .err{display:block;}
+.field.bad input[type=text],.field.bad input[type=email],.field.bad select,.field.bad textarea{border-color:var(--accent);}
+
+/* ---------- ナビボタン ---------- */
+.nav{display:flex;gap:10px;margin-top:28px;}
+.btn{
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:700;font-size:15px;letter-spacing:.05em;
+  border:1px solid rgba(214,72,43,.5);border-radius:0;
+  padding:15px 10px;cursor:pointer;flex:1;
+  background:linear-gradient(180deg, rgba(214,72,43,.13) 0%, rgba(214,72,43,.07) 100%);
+  color:#B23A1F;
+  box-shadow:4px 4px 0 rgba(27,27,27,.16);
+  transition:transform .18s,box-shadow .18s,background .18s;
+}
+.btn:active{
+  transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(27,27,27,.16);
+  background:linear-gradient(180deg, rgba(214,72,43,.2) 0%, rgba(214,72,43,.12) 100%);
+}
+.btn.back{
+  background:var(--white);color:var(--ink);
+  border:1px solid var(--rule);flex:0 0 32%;
+}
+.btn.back:active{background:var(--paper);}
+.btn[disabled]{opacity:.5;cursor:default;}
+
+/* ---------- 確認画面 ---------- */
+.confirm-list{border-top:1px solid var(--rule);}
+.confirm-row{border-bottom:1px solid var(--hair);padding:12px 2px;}
+.confirm-list .confirm-row:last-child{border-bottom:1px solid var(--rule);}
+.confirm-row .k{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--mute);}
+.confirm-row .v{font-size:14px;white-space:pre-wrap;word-break:break-word;margin-top:2px;}
+.confirm-row .v:empty::before{content:"（未入力）";color:#B9B5AA;}
+.confirm-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.confirm-thumbs img{width:64px;height:64px;object-fit:cover;border:1px solid var(--rule);}
+
+/* ---------- 完了画面 ---------- */
+.done-card{text-align:center;}
+.done-card .icon{
+  width:72px;height:72px;margin:8px auto 18px;border-radius:50%;
+  background:var(--white);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;color:var(--accent);
+}
+.done-card h2{justify-content:center;}
+.done-card p{font-size:13.5px;margin-top:10px;line-height:2;}
+.brandmark{
+  margin-top:28px;padding-top:20px;border-top:1px solid var(--hair);
+  font-family:"Bodoni Moda",serif;font-weight:700;
+  font-size:14px;letter-spacing:.3em;text-indent:.3em;color:var(--ink);text-align:center;
+}
+.brandmark span{
+  display:block;margin-top:7px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:10px;font-weight:500;letter-spacing:.3em;text-indent:.3em;color:var(--mute);
+}
+
+/* 送信中 */
+.sending{display:none;text-align:center;font-weight:700;margin-top:14px;font-size:13px;color:var(--mute);}
+.sending.show{display:block;}
+.spinner{
+  display:inline-block;width:15px;height:15px;vertical-align:-3px;margin-right:7px;
+  border:2px solid var(--hair);border-top-color:var(--accent);border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.foot{text-align:center;font-size:10px;letter-spacing:.14em;color:var(--mute);margin-top:30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <span class="eyebrow">SOMETECH</span>
+    <h1>お申し込み・ヒアリングフォーム</h1>
+    <p>所要時間はおよそ5分です。<br>途中で分からない項目があっても大丈夫です。</p>
+  </header>
+
+  <div class="steps" aria-hidden="true">
+    <div class="step-dot now" data-dot="1">1</div>
+    <div class="step-dot" data-dot="2">2</div>
+    <div class="step-dot" data-dot="3">3</div>
+    <div class="step-dot" data-dot="4">4</div>
+    <div class="step-dot" data-dot="5">5</div>
+  </div>
+
+  <!-- ================= STEP 1 ================= -->
+  <section class="card show" data-step="1">
+    <h2><span class="tag">STEP 1</span>お客様情報</h2>
+    <p class="lead">ご連絡とご契約に必要な情報です。</p>
+
+    <div class="field" data-key="name">
+      <label class="q" for="f-name">お名前<span class="badge req">必須</span></label>
+      <input type="text" id="f-name" autocomplete="name" placeholder="例：山田 花子">
+      <p class="err">お名前を入力してください</p>
+    </div>
+
+    <div class="field" data-key="email">
+      <label class="q" for="f-email">メールアドレス<span class="badge req">必須</span></label>
+      <input type="email" id="f-email" autocomplete="email" inputmode="email" placeholder="例：hanako@example.com">
+      <p class="err">メールアドレスの形式を確認してください</p>
+    </div>
+
+    <div class="field" data-key="contact">
+      <label class="q" for="f-contact">LINEなどの連絡先<span class="badge req">必須</span></label>
+      <input type="text" id="f-contact" placeholder="例：LINE ID">
+      <p class="hint">ご相談・制作中のやり取りは基本的に公式LINEで行います。ふだん連絡が取りやすいものをご記入ください。</p>
+      <label class="opt check nolineopt">
+        <input type="checkbox" id="f-noline">
+        <span class="mark"></span>LINEを利用していない（メールでのやり取りを希望）
+      </label>
+    </div>
+
+    <div class="field" data-key="zip">
+      <label class="q" for="f-zip">郵便番号<span class="badge req">必須</span></label>
+      <div class="zip-row">
+        <input type="text" id="f-zip" autocomplete="postal-code" inputmode="numeric" placeholder="例：3750000" maxlength="8">
+        <button type="button" class="zip-btn" id="zip-search">住所を自動入力</button>
+      </div>
+      <p class="hint">ハイフンなしでもOKです。ボタンを押すと住所が入ります。</p>
+      <p class="err">郵便番号を入力してください</p>
+    </div>
+
+    <div class="field" data-key="pref">
+      <label class="q" for="f-pref">都道府県<span class="badge req">必須</span></label>
+      <select id="f-pref">
+        <option value="">選択してください</option>
+      <option value="北海道">北海道</option><option value="青森県">青森県</option><option value="岩手県">岩手県</option><option value="宮城県">宮城県</option><option value="秋田県">秋田県</option><option value="山形県">山形県</option><option value="福島県">福島県</option><option value="茨城県">茨城県</option><option value="栃木県">栃木県</option><option value="群馬県">群馬県</option><option value="埼玉県">埼玉県</option><option value="千葉県">千葉県</option><option value="東京都">東京都</option><option value="神奈川県">神奈川県</option><option value="新潟県">新潟県</option><option value="富山県">富山県</option><option value="石川県">石川県</option><option value="福井県">福井県</option><option value="山梨県">山梨県</option><option value="長野県">長野県</option><option value="岐阜県">岐阜県</option><option value="静岡県">静岡県</option><option value="愛知県">愛知県</option><option value="三重県">三重県</option><option value="滋賀県">滋賀県</option><option value="京都府">京都府</option><option value="大阪府">大阪府</option><option value="兵庫県">兵庫県</option><option value="奈良県">奈良県</option><option value="和歌山県">和歌山県</option><option value="鳥取県">鳥取県</option><option value="島根県">島根県</option><option value="岡山県">岡山県</option><option value="広島県">広島県</option><option value="山口県">山口県</option><option value="徳島県">徳島県</option><option value="香川県">香川県</option><option value="愛媛県">愛媛県</option><option value="高知県">高知県</option><option value="福岡県">福岡県</option><option value="佐賀県">佐賀県</option><option value="長崎県">長崎県</option><option value="熊本県">熊本県</option><option value="大分県">大分県</option><option value="宮崎県">宮崎県</option><option value="鹿児島県">鹿児島県</option><option value="沖縄県">沖縄県</option></select>
+      <p class="err">都道府県を選択してください</p>
+    </div>
+
+    <div class="field" data-key="city">
+      <label class="q" for="f-city">市区町村・町域<span class="badge req">必須</span></label>
+      <input type="text" id="f-city" autocomplete="address-level2" placeholder="例：藤岡市○○町">
+      <p class="err">市区町村を入力してください</p>
+    </div>
+
+    <div class="field" data-key="addr2">
+      <label class="q" for="f-addr2">番地・建物名など<span class="badge req">必須</span></label>
+      <input type="text" id="f-addr2" autocomplete="address-line2" placeholder="例：1-2-3 ○○ビル2F">
+      <p class="err">番地を入力してください</p>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn next" data-go="2">次へ進む</button>
+    </div>
+  </section>
+
+  <!-- ================= STEP 2 ================= -->
+  <section class="card" data-step="2">
+    <h2><span class="tag">STEP 2</span>ホームページについて</h2>
+    <p class="lead">どんなホームページを作るかの土台になる部分です。</p>
+
+    <div class="field" data-key="biz">
+      <p class="q">業種・形態<span class="badge req">必須</span></p>
+      <div class="opts" data-group="biz" data-type="radio">
+        <label class="opt radio"><input type="radio" name="biz" value="個人サロン（個人事業主）"><span class="mark"></span>個人サロン（個人事業主）</label>
+        <label class="opt radio"><input type="radio" name="biz" value="美容室（スタッフ2名以上）"><span class="mark"></span>美容室（スタッフ2名以上）</label>
+        <label class="opt radio"><input type="radio" name="biz" value="フリーランス美容師（面貸し・業務委託）"><span class="mark"></span>フリーランス美容師（面貸し・業務委託）</label>
+        <label class="opt radio"><input type="radio" name="biz" value="美容師（個人）"><span class="mark"></span>美容師（個人）</label>
+        <label class="opt radio"><input type="radio" name="biz" value="その他"><span class="mark"></span>その他</label>
+      </div>
+      <div class="followup" data-follow="biz">
+        <input type="text" id="f-biz-other" placeholder="具体的な業種をご記入ください">
+      </div>
+      <p class="err">1つ選択してください</p>
+    </div>
+
+    <div class="field" data-key="plan">
+      <p class="q">ご希望のプラン<span class="badge req">必須</span></p>
+      <div class="opts" data-group="plan" data-type="radio">
+        <label class="opt radio"><input type="radio" name="plan" value="リンクハブ"><span class="mark"></span><span>リンクハブ<span class="sub">39,000円（税込）／各SNSとご予約先をまとめる1枚</span></span></label>
+        <label class="opt radio"><input type="radio" name="plan" value="ホームページ"><span class="mark"></span><span>ホームページ<span class="sub">198,000円（税込）／全部込み・公開後3か月のアフターケア付き</span></span></label>
+      </div>
+      <p class="hint">迷う場合はいちばん近いものでOKです。あとから変更できます。</p>
+      <p class="note">スタッフ紹介の掲載は、スタンダード・プレミアムで5名までが含まれます（ソロは掲載1名）。6名目からは1名につき10,000円（税込）を加算し、掲載は10名までとなります。それを超える場合は別ページ構成としてご相談ください。</p>
+      <p class="err">1つ選択してください</p>
+    </div>
+
+    <div class="field" data-key="purpose">
+      <p class="q">ホームページを作るいちばんの目的<span class="badge req">必須</span></p>
+      <div class="opts" data-group="purpose" data-type="radio">
+        <label class="opt radio"><input type="radio" name="purpose" value="新規のお客様を増やしたい"><span class="mark"></span>新規のお客様を増やしたい</label>
+        <label class="opt radio"><input type="radio" name="purpose" value="自分・店舗を紹介したい"><span class="mark"></span>自分・店舗を紹介したい</label>
+        <label class="opt radio"><input type="radio" name="purpose" value="メニュー・サービスを分かりやすく紹介したい"><span class="mark"></span>メニュー・サービスを分かりやすく紹介したい</label>
+        <label class="opt radio"><input type="radio" name="purpose" value="予約・お問い合わせにつなげたい"><span class="mark"></span>予約・お問い合わせにつなげたい</label>
+        <label class="opt radio"><input type="radio" name="purpose" value="その他"><span class="mark"></span>その他</label>
+      </div>
+      <div class="followup" data-follow="purpose">
+        <input type="text" id="f-purpose-other" placeholder="具体的な目的をご記入ください">
+      </div>
+      <p class="err">1つ選択してください</p>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn back" data-go="1">戻る</button>
+      <button type="button" class="btn next" data-go="3">次へ進む</button>
+    </div>
+  </section>
+
+  <!-- ================= STEP 3 ================= -->
+  <section class="card" data-step="3">
+    <h2><span class="tag">STEP 3</span>デザインについて</h2>
+    <p class="lead">イメージに近いものを気軽に選んでください。</p>
+
+    <div class="field" data-key="mood">
+      <p class="q">デザインの雰囲気<span class="badge req">必須</span><span class="badge multi">複数選択可</span></p>
+      <div class="opts" data-group="mood" data-type="check">
+        <label class="opt check"><input type="checkbox" name="mood" value="シンプル"><span class="mark"></span>シンプル</label>
+        <label class="opt check"><input type="checkbox" name="mood" value="おしゃれ"><span class="mark"></span>おしゃれ</label>
+        <label class="opt check"><input type="checkbox" name="mood" value="高級感"><span class="mark"></span>高級感</label>
+        <label class="opt check"><input type="checkbox" name="mood" value="ナチュラル"><span class="mark"></span>ナチュラル</label>
+        <label class="opt check"><input type="checkbox" name="mood" value="スタイリッシュ"><span class="mark"></span>スタイリッシュ</label>
+        <label class="opt check"><input type="checkbox" name="mood" value="モード"><span class="mark"></span>モード</label>
+        <label class="opt check"><input type="checkbox" name="mood" value="ポップ"><span class="mark"></span>ポップ</label>
+        <label class="opt check"><input type="checkbox" name="mood" value="その他"><span class="mark"></span>その他</label>
+      </div>
+      <div class="followup" data-follow="mood">
+        <input type="text" id="f-mood-other" placeholder="イメージを言葉でご記入ください">
+      </div>
+      <p class="err">1つ以上選択してください</p>
+    </div>
+
+    <div class="field" data-key="imageText">
+      <p class="q">仕上がりのイメージ<span class="badge req">必須</span></p>
+      <textarea id="f-imagetext" rows="4" placeholder="例：白ベースで透明感のある感じ／大人っぽく高級感を出したい／文字は少なめで写真を大きく　など"></textarea>
+      <p class="hint">箇条書きでも文章でもOKです。参考画像やURLがない場合も、ここで雰囲気が伝われば大丈夫です。</p>
+    </div>
+
+    <div class="field" data-key="images">
+      <p class="q">参考にしたいデザイン画像<span class="badge optional">任意</span></p>
+      <div class="upload-box" id="upload-box" role="button" tabindex="0">
+        <strong>タップして画像を選ぶ</strong>
+        <p class="hint">「こんな雰囲気にしたい」という画像があれば添付してください（複数枚OK）</p>
+      </div>
+      <input type="file" id="f-images" accept="image/*" multiple="" hidden="">
+      <div class="thumbs" id="thumbs"></div>
+      <p class="note">※添付画像はデザインの方向性を確認するための参考資料として使用します。画像・文章・デザイン等をそのままコピーしてホームページに使用するものではありません。</p>
+    </div>
+
+    <div class="field" data-key="refurl">
+      <p class="q">参考にしたいWebサイトのURL<span class="badge optional">任意</span></p>
+      <div class="url-list" id="url-list">
+        <input type="url" class="ref-url" inputmode="url" placeholder="https://">
+      </div>
+      <button type="button" class="add-url" id="add-url">＋ 参考サイトを追加</button>
+    </div>
+
+    <div class="field" data-key="reflike">
+      <label class="q" for="f-reflike">参考サイトのどこが好きですか？<span class="badge optional">任意</span></label>
+      <textarea id="f-reflike" placeholder="例：色使いが好き／写真の見せ方が好き／最初の画面の高級感が好き　など"></textarea>
+    </div>
+
+    <div class="field" data-key="content">
+      <p class="q">ホームページに載せたい内容<span class="badge req">必須</span><span class="badge multi">複数選択可</span></p>
+      <div class="opts" data-group="content" data-type="check">
+        <label class="opt check"><input type="checkbox" name="content" value="プロフィール・自己紹介"><span class="mark"></span>プロフィール・自己紹介</label>
+        <label class="opt check"><input type="checkbox" name="content" value="メニュー・料金"><span class="mark"></span>メニュー・料金</label>
+        <label class="opt check"><input type="checkbox" name="content" value="施術・サービス内容"><span class="mark"></span>施術・サービス内容</label>
+        <label class="opt check"><input type="checkbox" name="content" value="施術写真・作品写真"><span class="mark"></span>施術写真・作品写真</label>
+        <label class="opt check"><input type="checkbox" name="content" value="ビフォーアフター・実績"><span class="mark"></span>ビフォーアフター・実績</label>
+        <label class="opt check"><input type="checkbox" name="content" value="お客様の声"><span class="mark"></span>お客様の声</label>
+        <label class="opt check"><input type="checkbox" name="content" value="予約・お問い合わせ"><span class="mark"></span>予約・お問い合わせ</label>
+        <label class="opt check"><input type="checkbox" name="content" value="LINE"><span class="mark"></span>LINE</label>
+        <label class="opt check"><input type="checkbox" name="content" value="Instagram"><span class="mark"></span>Instagram</label>
+        <label class="opt check"><input type="checkbox" name="content" value="店舗情報・アクセス"><span class="mark"></span>店舗情報・アクセス</label>
+        <label class="opt check"><input type="checkbox" name="content" value="その他"><span class="mark"></span>その他</label>
+      </div>
+      <div class="followup" data-follow="content">
+        <input type="text" id="f-content-other" placeholder="載せたい内容をご記入ください">
+      </div>
+      <p class="err">1つ以上選択してください</p>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn back" data-go="2">戻る</button>
+      <button type="button" class="btn next" data-go="4">次へ進む</button>
+    </div>
+  </section>
+
+  <!-- ================= STEP 4 ================= -->
+  <section class="card" data-step="4">
+    <h2><span class="tag">STEP 4</span>公開方法・素材</h2>
+    <p class="lead">分からない項目は「相談したい」でOKです。</p>
+
+    <div class="field" data-key="domain">
+      <p class="q">ホームページのURL（ドメイン）について<span class="badge req">必須</span></p>
+      <div class="opts" data-group="domain" data-type="radio">
+        <label class="opt radio"><input type="radio" name="domain" value="無料URLで公開したい"><span class="mark"></span>無料URLで公開したい</label>
+        <label class="opt radio"><input type="radio" name="domain" value="独自ドメインを取得したい"><span class="mark"></span>独自ドメインを取得したい（.com、.jpなど）</label>
+        <label class="opt radio"><input type="radio" name="domain" value="よく分からないので相談したい"><span class="mark"></span>よく分からないので相談したい</label>
+      </div>
+      <p class="note">独自ドメイン（お店だけのURL）を取得する場合は、制作費とは別にドメイン代（目安：年1,500円〜3,000円程度）がかかります。ご相談のうえで決められますのでご安心ください。</p>
+      <p class="err">1つ選択してください</p>
+    </div>
+
+    <div class="field" data-key="materials">
+      <p class="q">写真・文章について<span class="badge req">必須</span></p>
+      <div class="opts" data-group="materials" data-type="radio">
+        <label class="opt radio"><input type="radio" name="materials" value="写真・文章を自分で用意する"><span class="mark"></span>写真・文章を自分で用意する</label>
+        <label class="opt radio"><input type="radio" name="materials" value="一部だけ用意する"><span class="mark"></span>一部だけ用意する</label>
+        <label class="opt radio"><input type="radio" name="materials" value="相談したい"><span class="mark"></span>相談したい</label>
+        <label class="opt radio"><input type="radio" name="materials" value="おまかせしたい"><span class="mark"></span>おまかせしたい</label>
+      </div>
+      <p class="err">1つ選択してください</p>
+    </div>
+
+    <div class="field" data-key="portfolio">
+      <p class="q">実績としての掲載<span class="badge req">必須</span></p>
+      <div class="opts" data-group="portfolio" data-type="radio">
+        <label class="opt radio"><input type="radio" name="portfolio" value="掲載してもよい"><span class="mark"></span>完成後、制作実績として掲載してもよい</label>
+        <label class="opt radio"><input type="radio" name="portfolio" value="掲載しないでほしい"><span class="mark"></span>掲載しないでほしい</label>
+      </div>
+      <p class="hint">当方サイト等で「制作実績」としてご紹介させていただく場合があります。掲載時は事前にご連絡します。</p>
+      <p class="err">1つ選択してください</p>
+    </div>
+
+    <div class="field" data-key="extra">
+      <label class="q" for="f-extra">その他のご希望<span class="badge optional">任意</span></label>
+      <textarea id="f-extra" placeholder="ホームページについてのご希望・ご質問・伝えておきたいことがあればご記入ください"></textarea>
+    </div>
+
+    <div class="nav">
+      <button type="button" class="btn back" data-go="3">戻る</button>
+      <button type="button" class="btn next" data-go="5">確認画面へ</button>
+    </div>
+  </section>
+
+  <!-- ================= STEP 5 ================= -->
+  <section class="card" data-step="5">
+    <h2><span class="tag">STEP 5</span>入力内容の確認</h2>
+    <p class="lead">内容をご確認のうえ、送信ボタンを押してください。</p>
+    <div class="confirm-list" id="confirm-list"></div>
+    <div class="nav">
+      <button type="button" class="btn back" data-go="4">修正する</button>
+      <button type="button" class="btn send" id="send-btn">この内容で送信</button>
+    </div>
+    <p class="sending" id="sending"><span class="spinner"></span>送信しています…そのままお待ちください</p>
+  </section>
+
+  <!-- ================= 完了 ================= -->
+  <section class="card done-card" data-step="done">
+    <div class="icon">✂</div>
+    <h2>お申し込みありがとうございます</h2>
+    <p>内容を確認後、こちらからご連絡します。<br>通常1〜2営業日以内にお返事いたします。</p>
+    <p class="hint" style="margin-top:14px;">このページはもう閉じていただいて大丈夫です。</p>
+    <p class="brandmark">SOMETECH<span>染めテク</span></p>
+  </section>
+
+  <p class="foot">SOMETECH（染めテク）／ホームページ制作 お申し込みフォーム</p>
+</div>
+
+<script>
+/* ============================================================
+   設定：あとでGoogle側の受け取りURL（GASのURL）をここに貼ります
+   ============================================================ */
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxUhbZFlsMXtw9Hzc1ab8SGm_kiLDlTcmQ9wUZ0a7luOOLR0lx1734dytqf5A0PTv7L/exec";
+
+/* ---------- 都道府県リスト ---------- */
+const PREFS = ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+const prefSel = document.getElementById("f-pref");
+PREFS.forEach(p=>{
+  const o=document.createElement("option");o.value=p;o.textContent=p;prefSel.appendChild(o);
+});
+
+/* ---------- ステップ切り替え ---------- */
+let current = 1;
+function showStep(n){
+  document.querySelectorAll(".card").forEach(c=>c.classList.remove("show"));
+  const target = document.querySelector('.card[data-step="'+n+'"]');
+  target.classList.add("show");
+  document.querySelectorAll(".step-dot").forEach(d=>{
+    const num = Number(d.dataset.dot);
+    d.classList.remove("done","now");
+    if(n==="done"){d.classList.add("done");}
+    else if(num < n){d.classList.add("done");}
+    else if(num === n){d.classList.add("now");}
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(n!=="done") current = n;
+}
+document.querySelectorAll("[data-go]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const to = Number(btn.dataset.go);
+    if(to > current && !validateStep(current)) return;
+    if(to === 5) buildConfirm();
+    showStep(to);
+  });
+});
+
+/* ---------- 選択肢の見た目とフォローアップ ---------- */
+document.querySelectorAll(".opts").forEach(group=>{
+  group.addEventListener("change",()=>{
+    const type = group.dataset.type;
+    group.querySelectorAll(".opt").forEach(opt=>{
+      const input = opt.querySelector("input");
+      opt.classList.toggle("on", input.checked);
+    });
+    const follow = document.querySelector('.followup[data-follow="'+group.dataset.group+'"]');
+    if(follow){
+      const otherChecked = [...group.querySelectorAll("input")].some(i=>i.checked && i.value==="その他");
+      follow.classList.toggle("show", otherChecked);
+      if(otherChecked){ follow.querySelector("input").focus(); }
+    }
+  });
+});
+
+/* ---------- 郵便番号 → 住所自動入力（zipcloud / JSONP） ---------- */
+function searchAddress(showAlert){
+  const raw = document.getElementById("f-zip").value.replace(/[^0-9]/g,"");
+  if(raw.length !== 7){ if(showAlert) alert("郵便番号は7桁で入力してください"); return; }
+  const cb = "zipcb_" + Date.now();
+  window[cb] = function(res){
+    delete window[cb]; script.remove();
+    if(res && res.results && res.results[0]){
+      const r = res.results[0];
+      prefSel.value = r.address1;
+      document.getElementById("f-city").value = r.address2 + r.address3;
+    }else if(showAlert){
+      alert("住所が見つかりませんでした。お手数ですが手入力をお願いします。");
+    }
+  };
+  const script = document.createElement("script");
+  script.src = "https://zipcloud.ibsnet.co.jp/api/search?zipcode="+raw+"&callback="+cb;
+  script.onerror = function(){ delete window[cb]; script.remove(); if(showAlert) alert("住所検索に接続できませんでした。手入力をお願いします。"); };
+  document.body.appendChild(script);
+}
+document.getElementById("zip-search").addEventListener("click",()=>searchAddress(true));
+/* 7桁そろったら自動で検索（ボタンを押さなくてもOK） */
+document.getElementById("f-zip").addEventListener("input",()=>{
+  const raw = document.getElementById("f-zip").value.replace(/[^0-9]/g,"");
+  if(raw.length === 7) searchAddress(false);
+});
+
+/* ---------- 参考画像（縮小してメモリに保持） ---------- */
+const images = [];   // {name, data}
+const fileInput = document.getElementById("f-images");
+const nolineChk = document.getElementById("f-noline");
+const contactInput = document.getElementById("f-contact");
+const nolineLabel = nolineChk.closest(".opt");
+nolineChk.addEventListener("change", ()=>{
+  nolineLabel.classList.toggle("on", nolineChk.checked);
+  contactInput.disabled = nolineChk.checked;
+  contactInput.value = "";
+  contactInput.placeholder = nolineChk.checked ? "（LINEなしのため入力不要です）" : "例：LINE ID";
+  if(nolineChk.checked){
+    const f = document.querySelector('.field[data-key="contact"]');
+    if(f) f.classList.remove("bad");
+  }
+});
+
+const uploadBox = document.getElementById("upload-box");
+uploadBox.addEventListener("click",()=>fileInput.click());
+uploadBox.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fileInput.click();}});
+fileInput.addEventListener("change",()=>{
+  [...fileInput.files].forEach(file=>{
+    if(!file.type.startsWith("image/")) return;
+    const reader = new FileReader();
+    reader.onload = ()=> {
+      const img = new Image();
+      img.onload = ()=>{
+        const MAX = 1600;
+        let w = img.width, h = img.height;
+        if(Math.max(w,h) > MAX){
+          const s = MAX / Math.max(w,h);
+          w = Math.round(w*s); h = Math.round(h*s);
+        }
+        const cv = document.createElement("canvas");
+        cv.width = w; cv.height = h;
+        cv.getContext("2d").drawImage(img,0,0,w,h);
+        images.push({name:file.name, data:cv.toDataURL("image/jpeg",0.8)});
+        renderThumbs();
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+  fileInput.value = "";
+});
+function renderThumbs(){
+  const box = document.getElementById("thumbs");
+  box.innerHTML = "";
+  images.forEach((im,idx)=>{
+    const d = document.createElement("div");
+    d.className = "thumb";
+    d.innerHTML = '<img src="'+im.data+'" alt=""><button type="button" class="del" aria-label="この画像を削除">×</button>';
+    d.querySelector(".del").addEventListener("click",()=>{images.splice(idx,1);renderThumbs();});
+    box.appendChild(d);
+  });
+}
+
+/* ---------- 参考URL追加 ---------- */
+document.getElementById("add-url").addEventListener("click",()=>{
+  const list = document.getElementById("url-list");
+  if(list.querySelectorAll(".ref-url").length >= 3){ alert("参考サイトは3件まで入力できます"); return; }
+  const input = document.createElement("input");
+  input.type = "url"; input.className = "ref-url"; input.placeholder = "https://"; input.inputMode = "url";
+  list.appendChild(input); input.focus();
+});
+
+/* ---------- 値の取得 ---------- */
+function radioVal(name){
+  const el = document.querySelector('input[name="'+name+'"]:checked');
+  return el ? el.value : "";
+}
+function checkVals(name){
+  return [...document.querySelectorAll('input[name="'+name+'"]:checked')].map(i=>i.value);
+}
+function withOther(val, otherId){
+  const other = document.getElementById(otherId).value.trim();
+  if(Array.isArray(val)){
+    return val.map(v=>v==="その他" && other ? "その他（"+other+"）" : v);
+  }
+  return val==="その他" && other ? "その他（"+other+"）" : val;
+}
+function collect(){
+  return {
+    name:    document.getElementById("f-name").value.trim(),
+    email:   document.getElementById("f-email").value.trim(),
+    contact: document.getElementById("f-noline").checked ? "LINEは利用していません（メール希望）" : document.getElementById("f-contact").value.trim(),
+    zip:     document.getElementById("f-zip").value.trim(),
+    pref:    prefSel.value,
+    city:    document.getElementById("f-city").value.trim(),
+    addr2:   document.getElementById("f-addr2").value.trim(),
+    biz:     withOther(radioVal("biz"),"f-biz-other"),
+    plan:    radioVal("plan"),
+    purpose: withOther(radioVal("purpose"),"f-purpose-other"),
+    mood:    withOther(checkVals("mood"),"f-mood-other"),
+    imageText: document.getElementById("f-imagetext").value.trim(),
+    refUrls: [...document.querySelectorAll(".ref-url")].map(i=>i.value.trim()).filter(v=>v),
+    refLike: document.getElementById("f-reflike").value.trim(),
+    content: withOther(checkVals("content"),"f-content-other"),
+    domain:  radioVal("domain"),
+    materials: radioVal("materials"),
+    portfolio: radioVal("portfolio"),
+    extra:   document.getElementById("f-extra").value.trim(),
+    imageCount: images.length
+  };
+}
+
+/* ---------- バリデーション ---------- */
+function markBad(key, bad){
+  const field = document.querySelector('.field[data-key="'+key+'"]');
+  if(field) field.classList.toggle("bad", bad);
+  return bad;
+}
+function validateStep(n){
+  const d = collect();
+  let firstBad = null;
+  const bads = [];
+  if(n===1){
+    if(markBad("name",  d.name==="")) bads.push("name");
+    if(markBad("email", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email))) bads.push("email");
+    if(markBad("zip",   d.zip.replace(/[^0-9]/g,"").length!==7)) bads.push("zip");
+    if(markBad("pref",  d.pref==="")) bads.push("pref");
+    if(markBad("city",  d.city==="")) bads.push("city");
+    if(markBad("addr2", d.addr2==="")) bads.push("addr2");
+    if(markBad("contact", !document.getElementById("f-noline").checked && d.contact==="")) bads.push("contact");
+  }
+  if(n===2){
+    if(markBad("biz",     radioVal("biz")==="")) bads.push("biz");
+    if(markBad("plan",    d.plan==="")) bads.push("plan");
+    if(markBad("purpose", radioVal("purpose")==="")) bads.push("purpose");
+  }
+  if(n===3){
+    if(markBad("mood",    checkVals("mood").length===0)) bads.push("mood");
+    if(markBad("imageText", document.getElementById("f-imagetext").value.trim()==="")) bads.push("imageText");
+    if(markBad("content", checkVals("content").length===0)) bads.push("content");
+  }
+  if(n===4){
+    if(markBad("domain",    d.domain==="")) bads.push("domain");
+    if(markBad("materials", d.materials==="")) bads.push("materials");
+    if(markBad("portfolio", d.portfolio==="")) bads.push("portfolio");
+  }
+  if(bads.length){
+    firstBad = document.querySelector('.field[data-key="'+bads[0]+'"]');
+    firstBad.scrollIntoView({behavior:"smooth",block:"center"});
+    return false;
+  }
+  return true;
+}
+
+/* ---------- 確認画面 ---------- */
+function buildConfirm(){
+  const d = collect();
+  const rows = [
+    ["お名前", d.name],
+    ["メールアドレス", d.email],
+    ["LINEなどの連絡先", d.contact],
+    ["ご住所", "〒"+d.zip+"\n"+d.pref+d.city+" "+d.addr2],
+    ["業種・形態", d.biz],
+    ["プラン", d.plan],
+    ["ホームページの目的", d.purpose],
+    ["デザインの雰囲気", d.mood.join("、")],
+    ["仕上がりのイメージ", d.imageText],
+    ["参考サイトURL", d.refUrls.join("\n")],
+    ["参考サイトのどこが好きか", d.refLike],
+    ["載せたい内容", d.content.join("、")],
+    ["URL（ドメイン）", d.domain],
+    ["写真・文章", d.materials],
+    ["実績としての掲載", d.portfolio],
+    ["その他のご希望", d.extra]
+  ];
+  const box = document.getElementById("confirm-list");
+  box.innerHTML = "";
+  rows.forEach(([k,v])=>{
+    const r = document.createElement("div");
+    r.className = "confirm-row";
+    const kk = document.createElement("p"); kk.className="k"; kk.textContent = k;
+    const vv = document.createElement("p"); vv.className="v"; vv.textContent = v;
+    r.appendChild(kk); r.appendChild(vv);
+    box.appendChild(r);
+  });
+  const r = document.createElement("div");
+  r.className = "confirm-row";
+  const kk = document.createElement("p"); kk.className="k"; kk.textContent = "参考画像";
+  r.appendChild(kk);
+  if(images.length){
+    const t = document.createElement("div"); t.className="confirm-thumbs";
+    images.forEach(im=>{const i=document.createElement("img");i.src=im.data;i.alt="";t.appendChild(i);});
+    r.appendChild(t);
+  }else{
+    const vv = document.createElement("p"); vv.className="v"; r.appendChild(vv);
+  }
+  document.getElementById("confirm-list").appendChild(r);
+}
+
+/* ---------- 送信 ---------- */
+document.getElementById("send-btn").addEventListener("click", async ()=>{
+  if(!GAS_URL){
+    alert("送信先がまだ設定されていません（テスト表示中です）");
+    return;
+  }
+  const btn = document.getElementById("send-btn");
+  btn.disabled = true;
+  document.getElementById("sending").classList.add("show");
+  const payload = collect();
+  payload.images = images;
+  payload.sentAt = new Date().toISOString();
+  try{
+    const res = await fetch(GAS_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok) throw new Error("bad status");
+    showStep("done");
+  }catch(e){
+    alert("送信に失敗しました。電波の良い場所でもう一度お試しください。\n何度も失敗する場合は、お手数ですがLINEでご連絡ください。");
+    btn.disabled = false;
+  }finally{
+    document.getElementById("sending").classList.remove("show");
+  }
+});
+
+/* ---------- 初期表示 ---------- */
+showStep(1);
+</script>
+
+
+<div id="trend_notification_app" class="trend_notification_app_outer"><div id="trend_notification"><div id="trend_notification_con"></div></div></div><div id="UMS_TOOLTIP" style="position: absolute; cursor: pointer; z-index: 2147483647; background: transparent; top: -100000px; left: -100000px;"></div></body><umsdataelement id="UMSDataElement" style="display: none;"></umsdataelement><div id="tmtoolbar_manual_rating_injected" style="display: none;">init</div><div id="UMSSendDataEventElement" style="display: none;">init</div></html>
