@@ -196,6 +196,13 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);ou
   font-family:"Zen Kaku Gothic New",sans-serif;
   font-size:10px;font-weight:500;letter-spacing:.3em;text-indent:.3em;color:var(--mute);
 }
+
+.consult-option{margin-top:18px;padding-top:18px;border-top:1px solid var(--hair);}
+.consult-option h3{font-size:15px;margin:0 0 8px;}
+.consult-option p{font-size:12.5px;line-height:1.9;margin-top:8px;}
+.consult-choice{display:flex;align-items:flex-start;gap:9px;line-height:1.8;font-size:13px;cursor:pointer;}
+.consult-choice input[type=checkbox]{display:block;appearance:auto;-webkit-appearance:checkbox;position:static;opacity:1;width:18px;height:18px;flex:0 0 18px;margin:3px 0 0;}
+.consult-option:has(input:disabled){color:var(--mute);}
 </style>
 </head>
 <body>
@@ -213,7 +220,7 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);ou
     <h2><span class="tag">契約書</span>内容のご確認</h2>
 
     <div class="doc" id="doc">
-      <p>本契約は、ホームページ等のウェブサイト（以下「本制作物」）の制作に関し、制作者（以下「当方」）と依頼者（以下「お客様」）との間で締結するものです。</p>
+      <p>本契約は、ホームページ等のウェブサイト（以下「本制作物」）の制作およびお申し込みいただいたオンラインコンサルオプションに関し、制作者（以下「当方」）と依頼者（以下「お客様」）との間で締結するものです。</p>
 
       <h3>第1条（本契約の目的）</h3>
       <p>当方は、お客様の依頼に基づき本制作物を制作し、お客様は、その対価をお支払いいただくものとします。</p>
@@ -231,6 +238,7 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);ou
         <tr><td>動画の追加（2本目から1本につき・3本まで）</td><td>5,000円</td></tr>
         <tr><td>ページの追加（1ページにつき。メニューからの移動を含む）</td><td>20,000円</td></tr>
         <tr><td>独自ドメインの設定代行</td><td>5,000円</td></tr>
+        <tr><td>オンラインコンサル（HP制作依頼者限定・3か月）</td><td>月額10,000円／総額30,000円</td></tr>
         <tr><td>お急ぎでの制作（通常の半分の期間）</td><td>制作費の40%増</td></tr>
       </table>
       <p>各プランに含まれる内容は、別途ご案内する料金表のとおりとします。</p>
@@ -331,9 +339,23 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);ou
         <li>お客様よりご提供いただいた情報の誤りに起因する損害について、当方は責任を負いません。</li>
       </ol>
 
-      <h3>第14条（協議）</h3>
+            <h3>第14条（オンラインコンサルオプション）</h3>
+      <ol>
+        <li>本オプションは、当方にホームページ制作をご依頼いただくお客様を対象とする任意の追加サービスです。リンクハブのみのご依頼およびコンサル単独のお申し込みは対象外です。希望欄へのチェック後、対象・料金・期間を確認し、双方の合意により契約に追加します。</li>
+        <li>料金は月額10,000円（税込）、3か月総額30,000円（税込）です。ホームページ制作費とは別途必要です。制作費と合わせて契約時に半額、完成後・お渡し前に残額をお支払いいただきます。コンサル分は各15,000円です。納品が支援期間より早い場合も、残額には3か月分のコンサル料金を含みます。</li>
+        <li>支援は公式LINE等によるオンライン相談を基本とし、SNSの発信、メニュー構成、ホットペッパービューティー等の掲載内容や予約導線について助言します。電話・オンライン通話の打ち合わせは希望に応じて月1回まで、事前予約により行います。打ち合わせの利用は必須ではなく、未利用分の繰越やその分の値引きはありません。即時・常時の返信対応は含みません。</li>
+        <li>支援開始日・終了日は開始前にメール等で合意し、開始日から3か月で終了します。自動更新は行いません。延長は別途協議します。ホームページ公開後の無料更新サポートや有料保守とは別のサービスです。</li>
+        <li>訪問、撮影、SNSの投稿代行、画像・動画制作、広告運用、予約媒体の直接編集、ホームページの追加修正は含みません。必要な作業・広告費・外部サービス費用は事前に内容と金額を提示し、承認後に実施します。</li>
+        <li>売上・利益・集客数・予約数・検索順位等の成果および投資回収を保証するものではありません。成果が得られなかったことのみを理由とする返金は行いません。ただし、当方の契約上の義務違反に基づく請求や、本条の中途終了時の精算を妨げるものではありません。</li>
+        <li>当方は必要な注意をもって助言を行います。施策の実施、価格・メニュー・広告費・人員等の最終判断はお客様が行います。当方の責めに帰すべき事由によらない、お客様の判断・未実施、提供資料の誤り、第三者サービスの障害や仕様変更による損害については責任を負いません。当方の故意・過失による契約上の義務違反まで免責するものではなく、当方の責任の有無は法令および契約内容に基づき判断します。</li>
+        <li>資料は個人を特定できない集計情報を基本とし、顧客名簿・パスワード等の送付を求めません。双方は業務で知り得た非公開情報を目的外に利用・開示しません。第三者サービスの利用条件に反するログイン・情報共有は行いません。</li>
+        <li>途中終了をご希望の場合は、公式LINEまたはメールでご連絡ください。終了日を確認し、提供済みの期間に対応する料金を精算します。月途中は該当する契約月の暦日数で日割りし、未提供期間の前受金は返金します。未提供期間の違約金は設けません。ホームページ制作を中止した場合も、コンサル分は本項に基づき別に精算します。本オプションの終了・返金には、第10条・第11条の制作費に関する定めを適用しません。</li>
+      </ol>
+
+      <h3>第15条（協議）</h3>
       <p>本契約に定めのない事項、または解釈に疑義が生じた事項については、双方誠意をもって協議のうえ解決するものとします。</p>
 
+      <p>契約書バージョン：2026-11-08 オンラインコンサル追加版</p>
       <h3>制作者</h3>
       <p>染めテク　清水良平<br>
       所在地：群馬県藤岡市中920-1　フォーリーフスA<br>
@@ -372,6 +394,12 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);ou
       <label class="q" for="f-option">オプション</label>
       <input type="text" id="f-option" placeholder="ご依頼のオプションがあればご記入ください">
       <p class="hint">特にない場合は空欄で問題ありません。</p>
+    </div>
+
+    <div class="field consult-option" data-key="consulting">
+      <p class="q">オンラインコンサル（追加オプション）</p>
+      <label class="consult-choice"><input type="checkbox" id="f-consulting" disabled><span>オンラインコンサルを希望する（月額10,000円・税込／3か月総額30,000円・税込）</span></label>
+      <p class="hint">ホームページプランをご選択の場合のみ追加できます。ご希望の場合は第14条もご確認ください。制作費と合わせて半額ずつお支払い、3か月で終了・自動更新なし。開始日・終了日は別途メール等で合意します。</p>
     </div>
 
     <div class="field" data-key="agree">
@@ -432,6 +460,15 @@ agreeInput.addEventListener("change", ()=>{
   agreeBox.classList.toggle("on", agreeInput.checked);
 });
 
+
+const consultInput = document.getElementById("f-consulting");
+document.getElementById("f-plan").addEventListener("change",()=>{
+  const eligible = document.getElementById("f-plan").value.startsWith("ホームページ");
+  consultInput.disabled = !eligible;
+  if(!eligible) consultInput.checked = false;
+});
+function consultingText(){ return !consultInput.disabled && consultInput.checked ? "オンラインコンサル：月額10,000円（税込）×3か月＝総額30,000円（税込）／HP制作依頼者限定／自動更新なし" : "オンラインコンサル：希望しない"; }
+
 /* ---------- 送信 ---------- */
 function markBad(key,bad){
   const f = document.querySelector('.field[data-key="'+key+'"]');
@@ -465,10 +502,11 @@ document.getElementById("send-btn").addEventListener("click", async ()=>{
     name: name,
     email: email,
     plan: plan,
-    option: option,
+    option: [option, consultingText()].filter(Boolean).join("\n"),
+    consulting: consultingText(),
     agreed: "同意する",
     agreedAt: new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"}),
-    contractVersion: "2026-09版",
+    contractVersion: "2026-11-08 オンラインコンサル追加版",
     userAgent: navigator.userAgent
   };
 
@@ -479,6 +517,8 @@ document.getElementById("send-btn").addEventListener("click", async ()=>{
       body: JSON.stringify(payload)
     });
     if(!res.ok) throw new Error("bad status");
+    const result = await res.json();
+    if(result.ok !== true) throw new Error("受付処理に失敗しました");
     document.getElementById("main-card").classList.add("hide");
     document.getElementById("done-card").classList.add("show");
     window.scrollTo({top:0,behavior:"smooth"});

@@ -268,6 +268,13 @@ select{
 @keyframes spin{to{transform:rotate(360deg);}}
 
 .foot{text-align:center;font-size:10px;letter-spacing:.14em;color:var(--mute);margin-top:30px;}
+
+.consult-option{margin-top:18px;padding-top:18px;border-top:1px solid var(--hair);}
+.consult-option h3{font-size:15px;margin:0 0 8px;}
+.consult-option p{font-size:12.5px;line-height:1.9;margin-top:8px;}
+.consult-choice{display:flex;align-items:flex-start;gap:9px;line-height:1.8;font-size:13px;cursor:pointer;}
+.consult-choice input[type=checkbox]{display:block;appearance:auto;-webkit-appearance:checkbox;position:static;opacity:1;width:18px;height:18px;flex:0 0 18px;margin:3px 0 0;}
+.consult-option:has(input:disabled){color:var(--mute);}
 </style>
 </head>
 <body>
@@ -377,6 +384,13 @@ select{
       </div>
       <p class="hint">迷う場合はいちばん近いものでOKです。あとから変更できます。</p>
       <p class="err">1つ選択してください</p>
+    </div>
+
+    <div class="field consult-option" data-key="consulting">
+      <p class="q">オンラインコンサル（HP制作の追加オプション）<span class="badge optional">任意</span></p>
+      <label class="consult-choice"><input type="checkbox" id="f-consulting" disabled><span>オンラインコンサルを希望する（月額10,000円・税込／3か月総額30,000円・税込）</span></label>
+      <p id="consulting-hint" class="hint">ホームページプランを選ぶとチェックできます。リンクハブのみ・コンサル単独ではお申し込みいただけません。</p>
+      <p class="hint">SNS・メニュー・掲載内容のオンライン相談。希望に応じて月1回まで事前予約の通話打ち合わせ。成果保証・投稿代行・撮影・制作・訪問は含みません。制作費と合わせて半額ずつお支払い、3か月で終了・自動更新なし。支援開始日は別途合意します。チェックはご希望の確認で、契約は別途内容確認・同意後に成立します。<a href="keiyaku.html">契約内容</a></p>
     </div>
 
     <div class="field" data-key="purpose">
@@ -735,10 +749,21 @@ function collect(){
     domain:  radioVal("domain"),
     materials: radioVal("materials"),
     portfolio: radioVal("portfolio"),
-    extra:   document.getElementById("f-extra").value.trim(),
+    extra:   [document.getElementById("f-extra").value.trim(), consultingText()].filter(Boolean).join("\n"),
+    consulting: consultingText(),
     imageCount: images.length
   };
 }
+
+
+const consultInput = document.getElementById("f-consulting");
+function syncConsulting(){
+  const eligible = radioVal("plan") === "ホームページ";
+  consultInput.disabled = !eligible;
+  if(!eligible) consultInput.checked = false;
+}
+document.querySelectorAll('input[name="plan"]').forEach(input=>input.addEventListener("change",syncConsulting));
+function consultingText(){ return !consultInput.disabled && consultInput.checked ? "オンラインコンサル：月額10,000円（税込）×3か月＝総額30,000円（税込）／HP制作依頼者限定／自動更新なし" : "オンラインコンサル：希望しない"; }
 
 /* ---------- バリデーション ---------- */
 function markBad(key, bad){
@@ -792,6 +817,7 @@ function buildConfirm(){
     ["ご住所", "〒"+d.zip+"\n"+d.pref+d.city+" "+d.addr2],
     ["業種・形態", d.biz],
     ["プラン", d.plan],
+    ["オンラインコンサル", d.consulting],
     ["ホームページの目的", d.purpose],
     ["デザインの雰囲気", d.mood.join("、")],
     ["仕上がりのイメージ", d.imageText],
@@ -801,7 +827,7 @@ function buildConfirm(){
     ["URL（ドメイン）", d.domain],
     ["写真・文章", d.materials],
     ["実績としての掲載", d.portfolio],
-    ["その他のご希望", d.extra]
+    ["その他のご希望", document.getElementById("f-extra").value.trim()]
   ];
   const box = document.getElementById("confirm-list");
   box.innerHTML = "";
@@ -846,6 +872,8 @@ document.getElementById("send-btn").addEventListener("click", async ()=>{
       body: JSON.stringify(payload)
     });
     if(!res.ok) throw new Error("bad status");
+    const result = await res.json();
+    if(result.ok !== true) throw new Error("受付処理に失敗しました");
     showStep("done");
   }catch(e){
     alert("送信に失敗しました。電波の良い場所でもう一度お試しください。\n何度も失敗する場合は、お手数ですがLINEでご連絡ください。");
