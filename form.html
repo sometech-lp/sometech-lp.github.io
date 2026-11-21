@@ -2,7 +2,6 @@
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex">
 <title>ホームページ制作 お申し込みフォーム</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
@@ -57,7 +56,7 @@ body{
 .step-dot.now{
   border-color:var(--accent);color:var(--accent);background:var(--white);
   transform:scale(1.12);
-  box-shadow:3px 3px 0 rgba(27,27,27,.12);
+  box-shadow:3px 3px 0 rgba(113,159,188,.12);
 }
 
 /* ---------- カード ---------- */
@@ -69,7 +68,7 @@ body{
 }
 .card::before{
   content:"";position:absolute;inset:7px;
-  border:1px solid rgba(27,27,27,.13);pointer-events:none;
+  border:1px solid rgba(113,159,188,.13);pointer-events:none;
 }
 .card > *{position:relative;}
 .card.show{display:block;animation:pop .25s ease;}
@@ -127,9 +126,9 @@ select{
 .zip-btn{
   flex-shrink:0;
   font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.04em;
-  border:1px solid rgba(214,72,43,.5);border-radius:0;
-  background:linear-gradient(180deg, rgba(214,72,43,.13) 0%, rgba(214,72,43,.07) 100%);
-  color:#B23A1F;padding:0 14px;cursor:pointer;
+  border:1px solid rgba(105,206,230,.5);border-radius:0;
+  background:linear-gradient(180deg, rgba(105,206,230,.13) 0%, rgba(105,206,230,.07) 100%);
+  color:#a2e8f4;padding:0 14px;cursor:pointer;
 }
 .zip-btn:active{transform:translate(1px,1px);}
 
@@ -156,7 +155,7 @@ select{
   width:5px;height:10px;margin-top:-3px;
   border:solid var(--accent);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);
 }
-.opt.on{background:rgba(214,72,43,.06);border-color:var(--accent);}
+.opt.on{background:rgba(105,206,230,.06);border-color:var(--accent);}
 .opt.on .mark::after{display:block;}
 .opt .sub{font-size:11.5px;color:var(--mute);display:block;font-weight:400;}
 .nolineopt{margin-top:10px;padding:11px 14px;font-size:13px;}
@@ -208,16 +207,16 @@ select{
 .btn{
   font-family:"Zen Kaku Gothic New",sans-serif;
   font-weight:700;font-size:15px;letter-spacing:.05em;
-  border:1px solid rgba(214,72,43,.5);border-radius:0;
+  border:1px solid rgba(105,206,230,.5);border-radius:0;
   padding:15px 10px;cursor:pointer;flex:1;
-  background:linear-gradient(180deg, rgba(214,72,43,.13) 0%, rgba(214,72,43,.07) 100%);
-  color:#B23A1F;
-  box-shadow:4px 4px 0 rgba(27,27,27,.16);
+  background:linear-gradient(180deg, rgba(105,206,230,.13) 0%, rgba(105,206,230,.07) 100%);
+  color:#a2e8f4;
+  box-shadow:4px 4px 0 rgba(113,159,188,.16);
   transition:transform .18s,box-shadow .18s,background .18s;
 }
 .btn:active{
-  transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(27,27,27,.16);
-  background:linear-gradient(180deg, rgba(214,72,43,.2) 0%, rgba(214,72,43,.12) 100%);
+  transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(113,159,188,.16);
+  background:linear-gradient(180deg, rgba(105,206,230,.2) 0%, rgba(105,206,230,.12) 100%);
 }
 .btn.back{
   background:var(--white);color:var(--ink);
@@ -269,13 +268,17 @@ select{
 
 .foot{text-align:center;font-size:10px;letter-spacing:.14em;color:var(--mute);margin-top:30px;}
 </style>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+JP:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="chroma.css">
+<link rel="stylesheet" href="chroma-detail.css">
 </head>
 <body>
 <div class="wrap">
 
   <header class="head">
     <span class="eyebrow">SOMETECH</span>
-    <h1>お申し込み・ヒアリングフォーム</h1>
+    <h1>お申し込み・<wbr>ヒアリングフォーム</h1>
     <p>所要時間はおよそ5分です。<br>途中で分からない項目があっても大丈夫です。</p>
   </header>
 

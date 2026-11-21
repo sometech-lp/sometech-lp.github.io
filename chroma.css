@@ -1,0 +1,36 @@
+:root {
+  color-scheme: dark;
+  --paper: #0a1523;
+  --white: #112131;
+  --ink: #eff5fb;
+  --mute: #abbdd0;
+  --rule: #34556b;
+  --hair: #284357;
+  --accent: #8ce1ee;
+  --deep: #091722;
+  --raised: #173044;
+  --error: #ffb6bc;
+  --title-font: "Cinzel", Georgia, serif;
+  --mono-font: "IBM Plex Mono", Consolas, monospace;
+  --body-font: "Noto Sans JP", "Yu Gothic UI", "Hiragino Kaku Gothic ProN", sans-serif;
+  --chroma-line: linear-gradient(90deg,#2bc4e8 0 31%,transparent 31% 34%,#f0509b 34% 65%,transparent 65% 68%,#ffce3a 68%);
+  --grid: linear-gradient(#8ac9ee0d 1px,transparent 1px),linear-gradient(90deg,#8ac9ee0d 1px,transparent 1px);
+}
+
+body {
+  font-family: var(--body-font);
+  background-image: var(--grid), radial-gradient(ellipse at 82% 4%,#16405885,transparent 54rem),
+    radial-gradient(ellipse at 8% 27%,#2a1c3b52,transparent 37rem);
+  background-size: 48px 48px,48px 48px,100% 68rem,100% 128rem;
+  background-repeat: repeat,repeat,no-repeat,no-repeat;
+  background-color: var(--paper);
+}
+
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+::selection { background: #21516a; color: #fff; }
+.f-mark { width: 64px; background: var(--chroma-line); }
+.f-en { font: 600 .95rem/1.4 var(--title-font); color: var(--ink); }
+.f-copy { font: 400 .75rem/1.5 var(--mono-font); color: var(--mute); }
