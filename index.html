@@ -67,16 +67,6 @@ a{color:inherit;text-decoration:none}
 .serif{font-family:"Shippori Mincho",serif}
 .en{font-family:"Bodoni Moda",serif}
 
-/* ============ 現れる動き ============ */
-.rise{opacity:0;transform:translateY(24px)}
-.slide-l{opacity:0;transform:translateX(-36px)}
-.slide-r{opacity:0;transform:translateX(36px)}
-.js .rise,.js .slide-l,.js .slide-r{
-  transition:opacity .85s ease,transform .85s cubic-bezier(.18,.85,.28,1);
-}
-.in{opacity:1 !important;transform:none !important}
-
-/* ============ ヒーロー ============ */
 .hero{
   position:relative;
   padding:30px 22px 0;
@@ -594,106 +584,14 @@ main{padding-bottom:130px}
 .mini-head .mh-bar{
   width:18px;height:2px;background:var(--accent);flex-shrink:0;
 }
-.js .mini-head{opacity:0}
-.js .mini-head .mh-bar{transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.18,.85,.28,1) .15s}
-.js .mini-head .mh-tx{display:inline-block;opacity:0;transform:translateX(-8px);transition:opacity .55s ease .3s,transform .55s cubic-bezier(.18,.85,.28,1) .3s}
-.js .mini-head.in{opacity:1;transition:opacity .01s}
-.js .mini-head.in .mh-bar{transform:scaleX(1)}
-.js .mini-head.in .mh-tx{opacity:1;transform:none}
-
-
-/* ============ 写真の現れ方 ============ */
 .band-ph{
   height:185px;margin:52px -22px 0;
   background-size:cover;background-position:center;
   border-top:1px solid var(--rule);
   border-bottom:1px solid var(--rule);
 }
-.js .ph-reveal{
-  clip-path:inset(0 100% 0 0);
-  opacity:.35;
-  transition:clip-path 1.15s cubic-bezier(.18,.85,.28,1),opacity .9s ease;
-}
-.js .ph-reveal.in{clip-path:inset(0 0 0 0);opacity:1}
-
-/* ============ ヒーローの登場モーション ============ */
-.js .hero-big .ch{
-  display:inline-block;
-  clip-path:inset(100% 0 -0.25em 0);
-  transform:translateY(.3em);
-  transition:clip-path .65s cubic-bezier(.18,.85,.28,1) var(--d,0s),
-             transform .65s cubic-bezier(.18,.85,.28,1) var(--d,0s);
-}
-.js .hero-big.in .ch{
-  clip-path:inset(-0.25em 0 -0.25em 0);
-  transform:none;
-}
-.js .hero-big .scissor{
-  opacity:0;
-  transform:translateY(.22em) rotate(-32deg) scale(.55);
-  transform-origin:50% 62%;
-  transition:opacity .45s ease .8s,
-             transform .9s cubic-bezier(.34,1.56,.64,1) .8s;
-}
-.js .hero-big.in .scissor{
-  opacity:1;
-  transform:translateY(.22em) rotate(0deg) scale(1);
-}
-.js .hero-ja .nb{
-  clip-path:inset(-10% 100% -10% 0);
-  transition:clip-path .75s cubic-bezier(.18,.85,.28,1) var(--d,0s);
-}
-.js .hero-ja.in .nb{
-  clip-path:inset(-10% -6% -10% 0);
-}
-.js .hero-lead{transition-delay:1.6s}
-.js .hero-note{transition-delay:1.75s}
-.js .hero-price{transition-delay:1.9s}
-
-/* ============ 見出しのモーション ============ */
-.js .sec-head .sec-no{
-  clip-path:inset(100% 0 0 0);
-  transform:translateY(10px);
-  transition:clip-path .7s cubic-bezier(.18,.85,.28,1), transform .7s cubic-bezier(.18,.85,.28,1);
-}
-.js .sec-head.in .sec-no{clip-path:inset(0 0 0 0);transform:none}
-
-.js .sec-head .sec-en{
-  opacity:0;letter-spacing:.62em;
-  transition:opacity .7s ease .18s, letter-spacing .8s cubic-bezier(.18,.85,.28,1) .18s;
-}
-.js .sec-head.in .sec-en{opacity:1;letter-spacing:.3em}
-
-.js .sec-head h2{position:relative;overflow:hidden}
-.js .sec-head h2 .tx{
-  display:inline-block;opacity:0;transform:translateY(105%);
-  transition:opacity .01s .34s, transform .62s cubic-bezier(.18,.85,.28,1) .34s;
-}
-.js .sec-head.in h2 .tx{opacity:1;transform:none}
-.js .sec-head h2::after{
-  content:"";position:absolute;inset:0;
-  background:var(--ink);
-  transform:scaleX(0);transform-origin:left;
-}
-.js .sec-head.in h2::after{
-  animation:inkpass .9s cubic-bezier(.6,.05,.25,1) .1s both;
-}
-@keyframes inkpass{
-  0%{transform:scaleX(0);transform-origin:left}
-  46%{transform:scaleX(1);transform-origin:left}
-  54%{transform:scaleX(1);transform-origin:right}
-  100%{transform:scaleX(0);transform-origin:right}
-}
-
-.js .sec-head .sec-line{
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .9s cubic-bezier(.18,.85,.28,1) .4s;
-}
-.js .sec-head.in .sec-line{transform:scaleX(1)}
-
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .rise,.slide-l,.slide-r{opacity:1;transform:none}
 }
 
 
@@ -1041,6 +939,7 @@ body.menu-open{overflow:hidden}
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+JP:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="chroma.css">
 <link rel="stylesheet" href="chroma-home.css">
+<link rel="stylesheet" href="chroma-scroll.css">
 <style>
 @media (prefers-reduced-motion: no-preference) {
   .hero-big[data-scan-title] {
@@ -1124,6 +1023,7 @@ body.menu-open{overflow:hidden}
 </style>
 </head>
 <body>
+<canvas class="grid-signals" aria-hidden="true"></canvas>
 
 <button class="menu-btn" type="button" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span></button>
 
@@ -1248,7 +1148,7 @@ body.menu-open{overflow:hidden}
         <span class="nb">変わるのは、</span><span class="nb">お客様があなたを</span><span class="nb">「クーポンの一覧」ではなく</span><span class="nb">「あなたの世界観」で選ぶようになること。</span><span class="nb">世界観で選ばれたお客様は、</span><span class="nb">次もあなたを指名します。</span>
       </p>
       </div>
-      <div class="naze-ph ph ph-reveal" aria-hidden="true"></div>
+      <div class="naze-ph ph ph-reveal" style="background-image:url('photo-bands/salon-entrance-after-rain.webp')" role="img" aria-label="雨上がりに店内の灯りがガラス越しに見える美容室の入口"></div>
     </div>
   </section>
 
@@ -1398,7 +1298,7 @@ body.menu-open{overflow:hidden}
     </div>
   </section>
 
-  <div class="mid-ph ph ph-reveal" aria-hidden="true"></div>
+  <div class="mid-ph ph ph-reveal" style="background-image:url('photo-bands/salon-mirror.webp')" role="img" aria-label="鏡越しに奥の店内が見える美容室のセット面"></div>
 
   <section class="sec">
     <div class="sec-head"><span class="sec-no">07</span><div><span class="sec-en">PRICE</span><h2><span class="tx">料金プラン</span></h2></div><span class="sec-line"></span></div>
@@ -1568,7 +1468,7 @@ body.menu-open{overflow:hidden}
     </div>
       </section>
 
-  <div class="band-ph ph-reveal" style="background-image:var(--ph-tools)" role="img" aria-label="美容師の道具を並べた写真"></div>
+  <div class="band-ph ph-reveal" style="background-image:url('photo-bands/stylist-fitting-cape.webp')" role="img" aria-label="美容師がお客様の肩に黒いカットクロスをかける手元"></div>
 
   <div class="pc-2col">
   <section class="sec">
@@ -1631,7 +1531,7 @@ body.menu-open{overflow:hidden}
   </section>
   </div>
 
-  <div class="band-ph ph-reveal" style="background-image:var(--ph-desk)" role="img" aria-label="打ち合わせの机の写真"></div>
+  <div class="band-ph ph-reveal" style="background-image:url('photo-bands/selecting-salon-photos.webp')" role="img" aria-label="作業台に並べたサロンの写真から使う一枚を選ぶ手元"></div>
 
   <div class="pc-2col">
   <section class="sec">
@@ -1673,7 +1573,7 @@ body.menu-open{overflow:hidden}
   </section>
   </div>
 
-  <div class="band-ph ph-reveal" style="background-image:var(--ph-chair)" role="img" aria-label="窓辺のカットチェアの写真"></div>
+  <div class="band-ph ph-reveal" style="background-image:url('photo-bands/after-hours-cut-chair-mirror.webp')" role="img" aria-label="閉店後のサロンで鏡に向いた茶色のカットチェア"></div>
 
   <section class="sec" id="profile">
     <div class="sec-head"><span class="sec-no">13</span><div><span class="sec-en">PROFILE</span><h2><span class="tx">制作者について</span></h2></div><span class="sec-line"></span></div>
@@ -1838,35 +1738,6 @@ body.menu-open{overflow:hidden}
 
 <script>
 (function(){
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce)return;
-  document.body.classList.add('js');
-  var els=document.querySelectorAll('.rise,.slide-l,.slide-r,.mini-head,.sec-head,.hero-big,.hero-ja,.ph-reveal');
-  if(!('IntersectionObserver' in window)){
-    els.forEach(function(el){el.classList.add('in')});return;
-  }
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
-    });
-  },{threshold:.12,rootMargin:'0px 0px -7% 0px'});
-  els.forEach(function(el){io.observe(el)});
-
-  // 保険：演出が動かない環境でも、1.5秒後に写真を必ず表示する
-  setTimeout(function(){
-    document.querySelectorAll('.ph-reveal').forEach(function(el){el.classList.add('in')});
-  },1500);
-
-  // 写真スロット：画像が入ったら PHOTO 表示を消す
-  document.querySelectorAll('.ph').forEach(function(el){
-    var bg=getComputedStyle(el).backgroundImage;
-    if(bg && bg!=='none') el.classList.add('has');
-  });
-})();
-</script>
-
-<script>
-(function(){
   var sl=document.getElementById('wSlider');
   var prev=document.getElementById('wPrev');
   var next=document.getElementById('wNext');
@@ -2026,5 +1897,7 @@ body.menu-open{overflow:hidden}
   requestAnimationFrame(render);
 })();
 </script>
+<script src="chroma-scroll.js"></script>
+<script src="grid-signals.js"></script>
 </body>
 </html>

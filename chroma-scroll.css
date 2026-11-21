@@ -1,0 +1,130 @@
+/* Scroll reveals for the SOMETECH home page. */
+.chroma-original {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  main {
+    --chroma-cyan: #8df4ff;
+    --chroma-magenta: #f18cd2;
+    --chroma-yellow: #f9e6a0;
+    --chroma-ease: cubic-bezier(.2,.8,.25,1);
+  }
+
+  [data-chroma="module"] { --chroma-offset: -20px; }
+  [data-chroma="module"].slide-r { --chroma-offset: 20px; }
+  .work[data-chroma="module"] { --chroma-offset: 10px; }
+
+  [data-chroma="photo"] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-chroma-state="waiting"]:not([data-chroma="heading"]),
+  [data-chroma="heading"][data-chroma-state="waiting"] .sec-en,
+  [data-chroma="heading"][data-chroma-state="waiting"] h2,
+  [data-chroma="heading"][data-chroma-state="waiting"] .sec-line {
+    opacity: 0;
+  }
+
+  [data-chroma="module"][data-chroma-state="loading"] {
+    animation: chroma-module .52s var(--chroma-ease) backwards;
+  }
+
+  [data-chroma="text"][data-chroma-state="loading"],
+  .sec-head[data-chroma-state="loading"] .sec-en {
+    animation: chroma-text .56s var(--chroma-ease) var(--chroma-text-delay, .13s) backwards;
+  }
+
+  .sec-head[data-chroma-state="loading"] .sec-en,
+  [data-chroma="text"].cta-en { --chroma-text-delay: .02s; }
+
+  .cta h2[data-chroma="text"] { --chroma-text-delay: .21s; }
+
+  .sec-head[data-chroma-state="loading"] .chroma-glyph {
+    animation: chroma-glyph .36s ease-out var(--chroma-glyph-delay) backwards;
+  }
+
+  .sec-head[data-chroma-state="loading"] .sec-line {
+    position: relative;
+    transform-origin: left center;
+    animation: chroma-line .86s var(--chroma-ease) .14s backwards;
+  }
+
+  .sec-head[data-chroma-state="loading"] .sec-line::after {
+    content: "";
+    position: absolute;
+    inset: -2px 0;
+    background: linear-gradient(90deg, transparent 0%, transparent 42%, var(--chroma-magenta) 48%,
+      var(--chroma-cyan) 51%, var(--chroma-yellow) 53%, transparent 59%) 100% 50% / 235% 1px no-repeat;
+    animation: chroma-trace .77s ease-out .18s both;
+    pointer-events: none;
+  }
+
+  [data-chroma="photo"][data-chroma-state="loading"] {
+    animation: chroma-photo .74s var(--chroma-ease) backwards;
+  }
+
+  [data-chroma="photo"][data-chroma-state="loading"]::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent 0%, transparent 39%, #518aa228 47%, #d0fbffdc 50%,
+        #f18cd265 51%, transparent 54%) 100% 50% / 230% 100% no-repeat,
+      repeating-linear-gradient(0deg, #9ce8ff29 0 1px, transparent 1px 6px);
+    animation: chroma-trace .70s linear both;
+    pointer-events: none;
+  }
+
+  [data-chroma-state]:focus-within,
+  :focus [data-chroma-state] {
+    opacity: 1;
+    animation: none;
+  }
+
+  @keyframes chroma-module {
+    from { opacity: 0; transform: translateX(var(--chroma-offset)); }
+    48% { opacity: .93; }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes chroma-text {
+    0% { opacity: 0; clip-path: inset(-.35em 100% -.35em 0); }
+    28% { opacity: .86; color: var(--chroma-cyan); text-shadow: 1px 0 var(--chroma-magenta); }
+    70% { clip-path: inset(-.35em 0 -.35em 0); }
+    100% { opacity: 1; text-shadow: none; }
+  }
+
+  @keyframes chroma-glyph {
+    0% { opacity: .07; }
+    28% { opacity: .82; color: var(--chroma-yellow); text-shadow: -.04em 0 var(--chroma-cyan), .05em 0 var(--chroma-magenta); }
+    62% { opacity: 1; color: var(--chroma-cyan); text-shadow: 0 0 .35em #7aeaff85; }
+    100% { opacity: 1; text-shadow: none; }
+  }
+
+  @keyframes chroma-line {
+    0% { opacity: 0; transform: scaleX(0); }
+    58% { opacity: 1; transform: scaleX(1); }
+    100% { transform: scaleX(1); }
+  }
+
+  @keyframes chroma-photo {
+    0% { opacity: .22; clip-path: inset(0 98% 0 0); }
+    70% { opacity: 1; clip-path: inset(0); }
+    100% { opacity: 1; clip-path: inset(0); }
+  }
+
+  @keyframes chroma-trace {
+    0% { opacity: 0; background-position: 100% 50%; }
+    22% { opacity: .84; }
+    70% { opacity: .7; }
+    100% { opacity: 0; background-position: 0 50%; }
+  }
+}

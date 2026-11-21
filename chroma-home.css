@@ -1,8 +1,35 @@
-:root { --gut: 22px; --wrap: 680px; }
+:root { --gut: 22px; --wrap: 680px; --grid-cell: 48px; }
 main { background: transparent; border: 0; padding-inline: var(--gut); }
 #works, #plan, #profile, #faq { scroll-margin-top: .75rem; }
 #contact { scroll-margin-top: 2rem; }
-body { font-size: 1rem; line-height: 1.9; }
+body {
+  font-size: 1rem;
+  line-height: 1.9;
+  isolation: isolate;
+  background-image: radial-gradient(ellipse at 82% 4%,#16405885,transparent 54rem),
+    radial-gradient(ellipse at 8% 27%,#2a1c3b52,transparent 37rem);
+  background-size: 100% 68rem,100% 128rem;
+  background-repeat: no-repeat;
+}
+body::before, .grid-signals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+body::before {
+  content: "";
+  z-index: -2;
+  background-image: var(--grid);
+  background-size: var(--grid-cell) var(--grid-cell);
+}
+.grid-signals {
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .grid-signals { visibility: hidden; }
+}
 .en { font-family: var(--title-font); }
 .pc-brand, .hero-top .en { font-family: var(--title-font); letter-spacing: .17em; }
 .pc-brand::before, .hero-top .en::before {
@@ -32,11 +59,11 @@ body.menu-open .menu-btn span:nth-child(2) { transform: translateY(-5px) rotate(
 .site-menu a .men { font: 500 .78rem/1.4 var(--mono-font); color: var(--accent); }
 
 .hero {
-  display: block; isolation: isolate; position: relative;
+  display: block; position: relative;
   margin: 0 calc(-1 * var(--gut));
   padding: 0;
   overflow: hidden;
-  background: #091723;
+  background: #09172314;
   color: var(--ink);
   border-bottom: 1px solid #40697f;
 }
@@ -52,7 +79,7 @@ body.menu-open .menu-btn span:nth-child(2) { transform: translateY(-5px) rotate(
   background: transparent;
 }
 .hero-video {
-  position: absolute; inset: 0 0 auto; height: 27rem; z-index: 0;
+  position: absolute; inset: 0 0 auto; height: 27rem; z-index: -3;
   background: #0b1a28 url("hero-sp.jpg") center 63% / cover no-repeat;
 }
 .hero-video video { width: 100%; height: 100%; object-position: 50% 63%; }
@@ -136,8 +163,7 @@ body.menu-open .menu-btn span:nth-child(2) { transform: translateY(-5px) rotate(
 .step-num { color: var(--accent); -webkit-text-stroke: 0; font: 500 1.1rem/1.6 var(--mono-font); }
 .cta {
   border-radius: 5px; border-color: #46748c;
-  background: var(--grid),radial-gradient(ellipse at 15% 0%,#1d3e54,#122437 68%,#101c2c);
-  background-size: 48px 48px,48px 48px,auto;
+  background: radial-gradient(ellipse at 15% 0%,#1d3e54a0,#122437a8 68%,#101c2cb0);
 }
 .cta::before { border-color: #567e9340; }
 .cta h2 { font-size: clamp(1.25rem,3vw,1.95rem); }
