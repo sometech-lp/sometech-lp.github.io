@@ -1041,6 +1041,87 @@ body.menu-open{overflow:hidden}
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Sans+JP:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="chroma.css">
 <link rel="stylesheet" href="chroma-home.css">
+<style>
+@media (prefers-reduced-motion: no-preference) {
+  .hero-big[data-scan-title] {
+    width: max-content;
+    isolation: isolate;
+    text-shadow: none;
+    --scan-head: -42%;
+    --scan-intensity: 0;
+    --scan-start: calc(var(--scan-head) - 30%);
+    --scan-tail: calc(var(--scan-head) - 16%);
+    --scan-warm: calc(var(--scan-head) - 7%);
+    --scan-peak: calc(var(--scan-head) + 3.6%);
+    --scan-out: calc(var(--scan-head) + 12%);
+    --scan-end: calc(var(--scan-head) + 24%);
+    background-image:
+      repeating-linear-gradient(0deg, #111d2d42 0 1px, transparent 1px 4px),
+      linear-gradient(180deg, #d2e4f7 0%, #f2fbff 23%, #b2d6ef 66%, #628eaf 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px #2ebcfa41);
+  }
+  .hero-big[data-scan-title]::before,
+  .hero-big[data-scan-title]::after {
+    content: attr(data-scan-title) / "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-big[data-scan-title]::before {
+    background-image: linear-gradient(104deg, transparent var(--scan-start),
+      #5446b284 var(--scan-tail), #eb80c8 var(--scan-warm), #4beeff var(--scan-head),
+      #efffff var(--scan-peak), #5adfff var(--scan-out), transparent var(--scan-end));
+    opacity: var(--scan-intensity);
+    filter: drop-shadow(0 0 5px #71dfff55);
+  }
+  .hero-big[data-scan-title]::after {
+    background-image: repeating-linear-gradient(0deg, transparent 0 3px, #030b29d9 3px 4.5px,
+      transparent 4.5px 7px, #e4fcffab 7px 8.2px, transparent 8.2px 12px);
+    --scan-mask: linear-gradient(104deg, transparent var(--scan-start),
+      #000 var(--scan-tail) var(--scan-out), transparent var(--scan-end));
+    -webkit-mask-image: var(--scan-mask);
+    mask-image: var(--scan-mask);
+    opacity: calc(var(--scan-intensity) * .73);
+  }
+  .hero-ja.hero-loading { position: relative; }
+  .hero-load-source {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .hero-load-glyph {
+    opacity: var(--glyph-opacity, .13);
+    color: color-mix(in srgb, var(--ink), #f6e79f var(--glyph-heat, 0%));
+    text-shadow: 0 0 .24em rgb(241 227 144 / var(--glyph-glow, 0));
+  }
+  .hero-load-track {
+    position: absolute;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, #8abeae69 45%, #e4d98fa8);
+    opacity: 0;
+  }
+  .hero-load-track::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    bottom: 0;
+    width: 2px;
+    height: .31em;
+    background: #f5e9a8;
+    box-shadow: 0 0 7px #f5e9a8a8;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -1800,6 +1881,149 @@ body.menu-open{overflow:hidden}
   sl.addEventListener('scroll',update,{passive:true});
   window.addEventListener('resize',update);
   update();
+})();
+</script>
+<script>
+(function () {
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const title = document.querySelector('.hero-big');
+  const subtitle = document.querySelector('.hero-ja');
+  if (motion.matches || !title || !subtitle) return;
+
+  const clamp = value => Math.max(0, Math.min(1, value));
+  const ease = value => value * value * (3 - 2 * value);
+  const scanEnabled = CSS.supports('-webkit-background-clip', 'text') || CSS.supports('background-clip', 'text');
+  if (scanEnabled) title.dataset.scanTitle = title.textContent.trim();
+
+  function scanTitle(seconds) {
+    if (!scanEnabled) return;
+    let head = -42;
+    let intensity = 0;
+    if (seconds >= .36 && seconds <= 3.06) {
+      head = -36 + 179 * ease((seconds - .36) / 2.7);
+      intensity = .95;
+    } else if (seconds >= 3.54 && seconds <= 5.73) {
+      head = 140 - 176 * ease((seconds - 3.54) / 2.19);
+      intensity = .62;
+    }
+    title.style.setProperty('--scan-head', head + '%');
+    title.style.setProperty('--scan-intensity', intensity);
+  }
+
+  // Keep the original sentence available to assistive technology throughout the reveal.
+  const original = document.createElement('span');
+  original.className = 'hero-load-source';
+  const visual = document.createElement('span');
+  visual.setAttribute('aria-hidden', 'true');
+  const track = document.createElement('span');
+  track.className = 'hero-load-track';
+  track.setAttribute('aria-hidden', 'true');
+  const glyphs = [];
+  const segmenter = Intl.Segmenter ? new Intl.Segmenter('ja', { granularity: 'grapheme' }) : null;
+  for (const child of subtitle.childNodes) {
+    if (child.nodeName === 'BR') {
+      visual.append(child.cloneNode());
+      continue;
+    }
+    const line = child.textContent.trim();
+    const characters = segmenter ? Array.from(segmenter.segment(line), item => item.segment) : Array.from(line);
+    for (const character of characters) {
+      const glyph = document.createElement('span');
+      glyph.className = 'hero-load-glyph';
+      glyph.textContent = character;
+      glyphs.push(glyph);
+      visual.append(glyph);
+    }
+  }
+  original.append(...subtitle.childNodes);
+  subtitle.classList.add('hero-loading');
+  subtitle.append(original, visual, track);
+
+  // Use the rendered line breaks, so a narrow viewport reads each wrapped line in order.
+  let rows;
+  function measureRows() {
+    const origin = subtitle.getBoundingClientRect();
+    rows = [];
+    glyphs.forEach(glyph => {
+      const rect = glyph.getBoundingClientRect();
+      const x = rect.left - origin.left;
+      const top = rect.top - origin.top;
+      let row = rows[rows.length - 1];
+      if (!row || Math.abs(row.top - top) > 2) {
+        row = { x, top, baseline: rect.bottom - origin.top - 2, glyphs: [] };
+        rows.push(row);
+      }
+      row.glyphs.push({ glyph, x, width: rect.width });
+    });
+  }
+  measureRows();
+  let subtitleActive = true;
+  const resize = typeof ResizeObserver === 'function' ? new ResizeObserver(measureRows) : null;
+  resize?.observe(subtitle);
+  document.fonts?.ready.then(() => {
+    if (subtitleActive) measureRows();
+  });
+
+  function drawSubtitle(seconds) {
+    let cursor;
+    const firstLineStarts = .30;
+    const firstLineEnds = rows.length === 1 ? 3.28 : 1.43;
+    rows.forEach((row, index) => {
+      const nextLineDuration = (3.28 - 1.56) / Math.max(1, rows.length - 1);
+      const start = index === 0 ? firstLineStarts : 1.56 + nextLineDuration * (index - 1);
+      const end = index === 0 ? firstLineEnds : start + nextLineDuration;
+      const progress = clamp((seconds - start) / (end - start));
+      const phase = progress * (row.glyphs.length + .65);
+      row.glyphs.forEach(({ glyph }, index) => {
+        const offset = phase - index;
+        const reveal = ease(clamp(offset / .78));
+        const heat = Math.sin(Math.PI * clamp(offset / 1.36)) * reveal;
+        glyph.style.setProperty('--glyph-opacity', .13 + .87 * reveal);
+        glyph.style.setProperty('--glyph-heat', heat * 100 + '%');
+        glyph.style.setProperty('--glyph-glow', .69 * heat);
+      });
+      const opacity = .93 * ease(clamp((seconds - start) / .1))
+        * (1 - ease(clamp((seconds - end + .12) / .29)));
+      if (opacity > 0) {
+        const index = Math.min(row.glyphs.length - 1, Math.floor(phase));
+        const current = row.glyphs[index];
+        cursor = {
+          left: row.x, top: row.baseline, opacity,
+          width: current.x - row.x + current.width * clamp(phase - index)
+        };
+      }
+    });
+    track.style.opacity = cursor?.opacity ?? 0;
+    if (cursor) {
+      track.style.left = cursor.left + 'px';
+      track.style.top = cursor.top + 'px';
+      track.style.width = cursor.width + 'px';
+    }
+  }
+
+  function finishSubtitle() {
+    subtitleActive = false;
+    resize?.disconnect();
+    subtitle.replaceChildren(...original.childNodes);
+    subtitle.classList.remove('hero-loading');
+  }
+
+  const started = performance.now();
+  function render(now) {
+    if (motion.matches) {
+      if (subtitleActive) finishSubtitle();
+      delete title.dataset.scanTitle;
+      return;
+    }
+    const seconds = (now - started) / 1000;
+    scanTitle(seconds);
+    if (subtitleActive) {
+      if (seconds >= 3.46) finishSubtitle();
+      else drawSubtitle(seconds);
+    }
+    if (seconds < 5.74) requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
 })();
 </script>
 </body>
